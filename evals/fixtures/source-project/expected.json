@@ -1,0 +1,12 @@
+{
+  "fixture": "source-project",
+  "kind": "source",
+  "mode": "launch",
+  "site": "https://acme-widgets.test",
+  "build": { "command": ["node", "build.mjs"], "env": { "SITE_URL": "https://acme-widgets.test" } },
+  "errors": [],
+  "warnings": [],
+  "allowedWarnings": [],
+  "infos": [],
+  "notes": "errors and warnings describe the dist/ built with SITE_URL=https://acme-widgets.test. Built with the defaults, the output points to http://localhost:4321 (CANON-001 among others)."
+}

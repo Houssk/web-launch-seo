@@ -1,0 +1,5 @@
+:root { --ink: #1d2433; --paper: #fbfaf7; --accent: #d65a31; }
+body { margin: 0; font-family: system-ui, sans-serif; color: var(--ink); background: var(--paper); }
+header, main, footer { max-width: 42rem; margin: 0 auto; padding: 1rem; }
+a { color: var(--accent); }
+.later { content-visibility: auto; }

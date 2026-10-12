@@ -1,0 +1,10 @@
+{
+  "fixture": "schema-geo",
+  "kind": "dist",
+  "mode": "launch",
+  "site": "https://acme-widgets.test",
+  "errors": ["JSONLD-001", "JSONLD-004"],
+  "warnings": ["ENTITY-001", "JSONLD-003", "JSONLD-005", "JSONLD-008", "LLMS-001", "ROBOTS-004", "ROBOTS-005"],
+  "allowedWarnings": [],
+  "infos": ["JSONLD-006", "JSONLD-007"]
+}

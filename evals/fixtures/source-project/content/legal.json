@@ -1,0 +1,13 @@
+{
+  "path": "/legal/",
+  "indexable": false,
+  "title": "Legal notice | Acme Widgets",
+  "description": "Publisher, registered office, publication director and hosting provider of the Acme Widgets website, as required for a company website.",
+  "h1": "Legal notice",
+  "updated": "2026-09-01",
+  "body": [
+    "Publisher: Acme Widgets Ltd, 14 Foundry Lane, Brookfield BR1 4QT. Phone: +44 20 7946 0000.",
+    "Publication director: the managing director of Acme Widgets Ltd.",
+    "Hosting provider: Northwind Hosting Ltd, 3 Harbour Road, Brookfield BR2 7LX. Phone: +44 20 7946 0001."
+  ]
+}

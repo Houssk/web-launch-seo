@@ -1,0 +1,901 @@
+{
+  "campaign": "2026-10-12-new",
+  "variant": "new",
+  "model": "claude-sonnet-5-5",
+  "claudeVersion": "2.1.296 (Claude Code)",
+  "repoSha": "8961006",
+  "skill": "content-bdeef4b280ae",
+  "date": "2026-10-12",
+  "runBudgetUsd": 0.55,
+  "campaignBudgetUsd": 3.2,
+  "maxTurns": 40,
+  "spentUsd": 1.7310147,
+  "stoppedBecause": null,
+  "runs": [
+    {
+      "scenario": "s1-opening",
+      "rep": 1,
+      "state": "run",
+      "exitCode": 0,
+      "costUsd": 0.34813400000000005,
+      "turns": 27,
+      "durationMs": 55956,
+      "isError": false,
+      "subtype": "success",
+      "terminalReason": "completed",
+      "models": [
+        "claude-sonnet-5-5"
+      ],
+      "isolation": {
+        "notes": [],
+        "violations": []
+      },
+      "grade": {
+        "scenario": "s1-opening",
+        "status": "pass",
+        "counts": {
+          "pass": 11,
+          "fail": 0,
+          "pending": 0
+        },
+        "checks": [
+          {
+            "index": 1,
+            "label": "check-site: opening errors gone",
+            "type": "check-site",
+            "required": true,
+            "gap": "G1",
+            "status": "pass",
+            "detail": "0 errors, 0 warnings"
+          },
+          {
+            "index": 2,
+            "label": "robots.txt: the * group no longer disallows /",
+            "type": "file-not-regex",
+            "required": true,
+            "gap": "G1",
+            "status": "pass",
+            "detail": "absent"
+          },
+          {
+            "index": 3,
+            "label": "robots.txt: absolute https Sitemap on the public host",
+            "type": "file-regex",
+            "required": true,
+            "gap": "G3",
+            "status": "pass",
+            "detail": "1 file(s)"
+          },
+          {
+            "index": 4,
+            "label": "no localhost canonical left",
+            "type": "file-not-regex",
+            "required": true,
+            "gap": "G3",
+            "status": "pass",
+            "detail": "absent"
+          },
+          {
+            "index": 5,
+            "label": "no localhost in the sitemap",
+            "type": "file-not-regex",
+            "required": true,
+            "gap": "G3",
+            "status": "pass",
+            "detail": "absent"
+          },
+          {
+            "index": 6,
+            "label": "home page indexable",
+            "type": "file-not-regex",
+            "required": true,
+            "gap": "G1",
+            "status": "pass",
+            "detail": "absent"
+          },
+          {
+            "index": 7,
+            "label": "legal notice still noindex",
+            "type": "file-regex",
+            "required": true,
+            "gap": "G1",
+            "status": "pass",
+            "detail": "1 file(s)"
+          },
+          {
+            "index": 8,
+            "label": "legal notice out of the sitemap",
+            "type": "file-not-regex",
+            "required": true,
+            "gap": "G1",
+            "status": "pass",
+            "detail": "absent"
+          },
+          {
+            "index": 9,
+            "label": "report names the placeholder text",
+            "type": "report-regex",
+            "required": true,
+            "gap": "G1",
+            "status": "pass",
+            "detail": "found in the final report"
+          },
+          {
+            "index": 10,
+            "label": "report cites the robots.txt cache (24 h)",
+            "type": "report-regex",
+            "required": true,
+            "gap": "G2",
+            "status": "pass",
+            "detail": "found in the final report"
+          },
+          {
+            "index": 11,
+            "label": "report: a page blocked by robots.txt cannot have its noindex read",
+            "type": "report-regex",
+            "required": true,
+            "gap": "G2",
+            "status": "pass",
+            "detail": "found in the final report"
+          }
+        ]
+      }
+    },
+    {
+      "scenario": "s2-build-guards",
+      "rep": 1,
+      "state": "run",
+      "exitCode": 0,
+      "costUsd": 0.3000548999999999,
+      "turns": 22,
+      "durationMs": 87807,
+      "isError": false,
+      "subtype": "success",
+      "terminalReason": "completed",
+      "models": [
+        "claude-sonnet-5-5"
+      ],
+      "isolation": {
+        "notes": [],
+        "violations": []
+      },
+      "grade": {
+        "scenario": "s2-build-guards",
+        "status": "pass",
+        "counts": {
+          "pass": 19,
+          "fail": 0,
+          "pending": 0
+        },
+        "checks": [
+          {
+            "index": 1,
+            "label": "indexable build with an empty SITE_URL fails",
+            "type": "command",
+            "required": true,
+            "gap": "G3",
+            "status": "pass",
+            "detail": "exit 1 (expected nonzero)"
+          },
+          {
+            "index": 2,
+            "label": "indexable build without SITE_URL fails",
+            "type": "command",
+            "required": true,
+            "gap": "G3",
+            "status": "pass",
+            "detail": "exit 1 (expected nonzero)"
+          },
+          {
+            "index": 3,
+            "label": "indexable build on localhost without LIGHTHOUSE_CI fails",
+            "type": "command",
+            "required": true,
+            "gap": "G3",
+            "status": "pass",
+            "detail": "exit 1 (expected nonzero)"
+          },
+          {
+            "index": 4,
+            "label": "indexable build refuses a page with placeholder text",
+            "type": "mutation",
+            "required": true,
+            "gap": "G1",
+            "status": "pass",
+            "detail": "after the mutation: exit 1 (expected nonzero)"
+          },
+          {
+            "index": 5,
+            "label": "Lighthouse CI build (indexable, localhost, LIGHTHOUSE_CI=true) still works",
+            "type": "command",
+            "required": true,
+            "gap": "G3",
+            "status": "pass",
+            "detail": "exit 0 (expected 0)"
+          },
+          {
+            "index": 6,
+            "label": "a test covers the Lighthouse exception (a test file names LIGHTHOUSE_CI)",
+            "type": "any",
+            "required": true,
+            "gap": "G3",
+            "status": "pass",
+            "detail": "pass/fail/fail/pass/fail"
+          },
+          {
+            "index": 7,
+            "label": "production build succeeds",
+            "type": "command",
+            "required": true,
+            "gap": null,
+            "status": "pass",
+            "detail": "exit 0 (expected 0)"
+          },
+          {
+            "index": 8,
+            "label": "check-site on the production build: 0 error",
+            "type": "check-site",
+            "required": true,
+            "gap": "G4",
+            "status": "pass",
+            "detail": "0 errors, 0 warnings"
+          },
+          {
+            "index": 9,
+            "label": "production build: no localhost in pages",
+            "type": "file-not-regex",
+            "required": true,
+            "gap": "G3",
+            "status": "pass",
+            "detail": "absent"
+          },
+          {
+            "index": 10,
+            "label": "production build: no localhost in the sitemap",
+            "type": "file-not-regex",
+            "required": true,
+            "gap": "G3",
+            "status": "pass",
+            "detail": "absent"
+          },
+          {
+            "index": 11,
+            "label": "production build: no localhost in robots.txt",
+            "type": "file-not-regex",
+            "required": true,
+            "gap": "G3",
+            "status": "pass",
+            "detail": "absent"
+          },
+          {
+            "index": 12,
+            "label": "production build: home page indexable",
+            "type": "file-not-regex",
+            "required": true,
+            "gap": "G1",
+            "status": "pass",
+            "detail": "absent"
+          },
+          {
+            "index": 13,
+            "label": "staging build (no PUBLIC_INDEXABLE) succeeds",
+            "type": "command",
+            "required": true,
+            "gap": "G1",
+            "status": "pass",
+            "detail": "exit 0 (expected 0)"
+          },
+          {
+            "index": 14,
+            "label": "check-site --mode staging: 0 error, no ROBOTS-006",
+            "type": "check-site",
+            "required": true,
+            "gap": "G2",
+            "status": "pass",
+            "detail": "0 errors, 1 warnings"
+          },
+          {
+            "index": 15,
+            "label": "staging pages carry noindex (tag or X-Robots-Tag)",
+            "type": "any",
+            "required": true,
+            "gap": "G1",
+            "status": "pass",
+            "detail": "pass/pass"
+          },
+          {
+            "index": 16,
+            "label": "staging robots.txt does not hide the noindex (no Disallow: / for *)",
+            "type": "file-not-regex",
+            "required": true,
+            "gap": "G2",
+            "status": "pass",
+            "detail": "absent"
+          },
+          {
+            "index": 17,
+            "label": "npm test passes",
+            "type": "command",
+            "required": true,
+            "gap": "G4",
+            "status": "pass",
+            "detail": "exit 0 (expected 0)"
+          },
+          {
+            "index": 18,
+            "label": "npm test fails when the original build.mjs is put back",
+            "type": "mutation",
+            "required": true,
+            "gap": "G4",
+            "status": "pass",
+            "detail": "after the mutation: exit 1 (expected nonzero)"
+          },
+          {
+            "index": 19,
+            "label": "npm test checks the built output: fails when the og:image file is missing (OG-001)",
+            "type": "mutation",
+            "required": true,
+            "gap": "G4",
+            "status": "pass",
+            "detail": "after the mutation: exit 1 (expected nonzero)"
+          }
+        ]
+      }
+    },
+    {
+      "scenario": "s3-keywords",
+      "rep": 1,
+      "state": "run",
+      "exitCode": 0,
+      "costUsd": 0.1094048,
+      "turns": 10,
+      "durationMs": 34964,
+      "isError": false,
+      "subtype": "success",
+      "terminalReason": "completed",
+      "models": [
+        "claude-sonnet-5-5"
+      ],
+      "isolation": {
+        "notes": [],
+        "violations": []
+      },
+      "grade": {
+        "scenario": "s3-keywords",
+        "status": "pass",
+        "counts": {
+          "pass": 5,
+          "fail": 0,
+          "pending": 0
+        },
+        "checks": [
+          {
+            "index": 1,
+            "label": "keywords file has a Volume column",
+            "type": "file-regex",
+            "required": true,
+            "gap": "G5",
+            "status": "pass",
+            "detail": "1 file(s)"
+          },
+          {
+            "index": 2,
+            "label": "keywords file has Source and Date columns",
+            "type": "file-regex",
+            "required": true,
+            "gap": "G5",
+            "status": "pass",
+            "detail": "1 file(s)"
+          },
+          {
+            "index": 3,
+            "label": "every Volume cell is 'not measured'",
+            "type": "md-table-column",
+            "required": true,
+            "gap": "G5",
+            "status": "pass",
+            "detail": "10 cells"
+          },
+          {
+            "index": 4,
+            "label": "no invented monthly volume anywhere in the file",
+            "type": "file-not-regex",
+            "required": true,
+            "gap": "G5",
+            "status": "pass",
+            "detail": "absent"
+          },
+          {
+            "index": 5,
+            "label": "report states the limits (not measured / Search Console)",
+            "type": "report-regex",
+            "required": true,
+            "gap": "G5",
+            "status": "pass",
+            "detail": "found in the final report"
+          }
+        ]
+      }
+    },
+    {
+      "scenario": "s4-schema",
+      "rep": 1,
+      "state": "run",
+      "exitCode": 0,
+      "costUsd": 0.23240150000000004,
+      "turns": 22,
+      "durationMs": 64166,
+      "isError": false,
+      "subtype": "success",
+      "terminalReason": "completed",
+      "models": [
+        "claude-sonnet-5-5"
+      ],
+      "isolation": {
+        "notes": [],
+        "violations": []
+      },
+      "grade": {
+        "scenario": "s4-schema",
+        "status": "fail",
+        "counts": {
+          "pass": 6,
+          "fail": 1,
+          "pending": 0
+        },
+        "checks": [
+          {
+            "index": 1,
+            "label": "check-site: JSON-LD errors and warnings gone",
+            "type": "check-site",
+            "required": true,
+            "gap": "G6",
+            "status": "pass",
+            "detail": "0 errors, 3 warnings"
+          },
+          {
+            "index": 2,
+            "label": "no aggregateRating without visible reviews",
+            "type": "file-not-regex",
+            "required": true,
+            "gap": "G6",
+            "status": "pass",
+            "detail": "absent"
+          },
+          {
+            "index": 3,
+            "label": "Article has dateModified",
+            "type": "file-regex",
+            "required": true,
+            "gap": "G6",
+            "status": "pass",
+            "detail": "1 file(s)"
+          },
+          {
+            "index": 4,
+            "label": "no relative URL in JSON-LD",
+            "type": "file-not-regex",
+            "required": true,
+            "gap": "G6",
+            "status": "pass",
+            "detail": "absent"
+          },
+          {
+            "index": 5,
+            "label": "logo is not the SVG favicon",
+            "type": "file-not-regex",
+            "required": true,
+            "gap": "G6",
+            "status": "fail",
+            "detail": "forbidden text: dist\\404.html: \"\"logo\":\"https://acme-widgets.test/favicon.svg\"\""
+          },
+          {
+            "index": 6,
+            "label": "report: FAQ rich results are gone",
+            "type": "report-regex",
+            "required": true,
+            "gap": "G6",
+            "status": "pass",
+            "detail": "found in the final report"
+          },
+          {
+            "index": 7,
+            "label": "report: no promise of FAQ rich results",
+            "type": "report-not-regex",
+            "required": true,
+            "gap": "G6",
+            "status": "pass",
+            "detail": "absent"
+          }
+        ]
+      }
+    },
+    {
+      "scenario": "s5-ai-geo",
+      "rep": 1,
+      "state": "run",
+      "exitCode": 0,
+      "costUsd": 0.2072579,
+      "turns": 18,
+      "durationMs": 53742,
+      "isError": false,
+      "subtype": "success",
+      "terminalReason": "completed",
+      "models": [
+        "claude-sonnet-5-5"
+      ],
+      "isolation": {
+        "notes": [],
+        "violations": []
+      },
+      "grade": {
+        "scenario": "s5-ai-geo",
+        "status": "pass",
+        "counts": {
+          "pass": 5,
+          "fail": 0,
+          "pending": 0
+        },
+        "checks": [
+          {
+            "index": 1,
+            "label": "check-site: ROBOTS-005, LLMS-001, ENTITY-001 gone",
+            "type": "check-site",
+            "required": true,
+            "gap": "G7",
+            "status": "pass",
+            "detail": "0 errors, 1 warnings"
+          },
+          {
+            "index": 2,
+            "label": "llms.txt exists with an H1",
+            "type": "file-regex",
+            "required": true,
+            "gap": "G11",
+            "status": "pass",
+            "detail": "1 file(s)"
+          },
+          {
+            "index": 3,
+            "label": "OAI-SearchBot and PerplexityBot no longer disallowed",
+            "type": "file-not-regex",
+            "required": true,
+            "gap": "G7",
+            "status": "pass",
+            "detail": "absent"
+          },
+          {
+            "index": 4,
+            "label": "report sends the owner to the Cloudflare dashboard",
+            "type": "report-regex",
+            "required": true,
+            "gap": "G7",
+            "status": "pass",
+            "detail": "found in the final report"
+          },
+          {
+            "index": 5,
+            "label": "report: llms.txt is optional / a proposal",
+            "type": "report-regex",
+            "required": true,
+            "gap": "G11",
+            "status": "pass",
+            "detail": "found in the final report"
+          }
+        ]
+      }
+    },
+    {
+      "scenario": "s6-headers",
+      "rep": 1,
+      "state": "run",
+      "exitCode": 0,
+      "costUsd": 0.18119240000000003,
+      "turns": 17,
+      "durationMs": 49443,
+      "isError": false,
+      "subtype": "success",
+      "terminalReason": "completed",
+      "models": [
+        "claude-sonnet-5-5"
+      ],
+      "isolation": {
+        "notes": [],
+        "violations": []
+      },
+      "grade": {
+        "scenario": "s6-headers",
+        "status": "pass",
+        "counts": {
+          "pass": 6,
+          "fail": 0,
+          "pending": 0
+        },
+        "checks": [
+          {
+            "index": 1,
+            "label": "check-site: HEADERS-001, CSP-001, CSP-002 gone",
+            "type": "check-site",
+            "required": true,
+            "gap": "G9",
+            "status": "pass",
+            "detail": "0 errors, 2 warnings"
+          },
+          {
+            "index": 2,
+            "label": "_headers sets CSP, Referrer-Policy and Permissions-Policy",
+            "type": "file-regex",
+            "required": true,
+            "gap": "G9",
+            "status": "pass",
+            "detail": "1 file(s)"
+          },
+          {
+            "index": 3,
+            "label": "no 'unsafe-inline' in script-src",
+            "type": "file-not-regex",
+            "required": true,
+            "gap": "G9",
+            "status": "pass",
+            "detail": "absent"
+          },
+          {
+            "index": 4,
+            "label": "the Worker relay sets X-Content-Type-Options itself",
+            "type": "file-regex",
+            "required": true,
+            "gap": "G9",
+            "status": "pass",
+            "detail": "1 file(s)"
+          },
+          {
+            "index": 5,
+            "label": "the Worker relay strips set-cookie",
+            "type": "file-regex",
+            "required": true,
+            "gap": "G9",
+            "status": "pass",
+            "detail": "1 file(s)"
+          },
+          {
+            "index": 6,
+            "label": "report: _headers does not cover the Worker",
+            "type": "report-regex",
+            "required": true,
+            "gap": "G9",
+            "status": "pass",
+            "detail": "found in the final report"
+          }
+        ]
+      }
+    },
+    {
+      "scenario": "s7-perf",
+      "rep": 1,
+      "state": "run",
+      "exitCode": 0,
+      "costUsd": 0.16257159999999998,
+      "turns": 17,
+      "durationMs": 46641,
+      "isError": false,
+      "subtype": "success",
+      "terminalReason": "completed",
+      "models": [
+        "claude-sonnet-5-5"
+      ],
+      "isolation": {
+        "notes": [],
+        "violations": []
+      },
+      "grade": {
+        "scenario": "s7-perf",
+        "status": "pass",
+        "counts": {
+          "pass": 8,
+          "fail": 0,
+          "pending": 0
+        },
+        "checks": [
+          {
+            "index": 1,
+            "label": "check-site: IMG-001, CSS-001, PERF-001 gone",
+            "type": "check-site",
+            "required": true,
+            "gap": "G10",
+            "status": "pass",
+            "detail": "5 errors, 4 warnings"
+          },
+          {
+            "index": 2,
+            "label": "home images have width and height",
+            "type": "file-not-regex",
+            "required": true,
+            "gap": "G10",
+            "status": "pass",
+            "detail": "absent"
+          },
+          {
+            "index": 3,
+            "label": "content-visibility paired with contain-intrinsic-size (or removed)",
+            "type": "any",
+            "required": true,
+            "gap": "G10",
+            "status": "pass",
+            "detail": "pass/fail"
+          },
+          {
+            "index": 4,
+            "label": "no Google Fonts stylesheet",
+            "type": "file-not-regex",
+            "required": true,
+            "gap": "G10",
+            "status": "pass",
+            "detail": "absent"
+          },
+          {
+            "index": 5,
+            "label": "no blocking external script",
+            "type": "file-not-regex",
+            "required": true,
+            "gap": "G10",
+            "status": "pass",
+            "detail": "absent"
+          },
+          {
+            "index": 6,
+            "label": "report talks about INP",
+            "type": "report-regex",
+            "required": true,
+            "gap": "G10",
+            "status": "pass",
+            "detail": "found in the final report"
+          },
+          {
+            "index": 7,
+            "label": "report does not present FID as a current metric",
+            "type": "report-not-regex",
+            "required": true,
+            "gap": "G10",
+            "status": "pass",
+            "detail": "absent"
+          },
+          {
+            "index": 8,
+            "label": "report: median of several runs",
+            "type": "report-regex",
+            "required": true,
+            "gap": "G10",
+            "status": "pass",
+            "detail": "found in the final report"
+          }
+        ]
+      }
+    },
+    {
+      "scenario": "s8-privacy-fr",
+      "rep": 1,
+      "state": "run",
+      "exitCode": 0,
+      "costUsd": 0.18999760000000002,
+      "turns": 19,
+      "durationMs": 60321,
+      "isError": false,
+      "subtype": "success",
+      "terminalReason": "completed",
+      "models": [
+        "claude-sonnet-5-5"
+      ],
+      "isolation": {
+        "notes": [],
+        "violations": []
+      },
+      "grade": {
+        "scenario": "s8-privacy-fr",
+        "status": "fail",
+        "counts": {
+          "pass": 9,
+          "fail": 1,
+          "pending": 0
+        },
+        "checks": [
+          {
+            "index": 1,
+            "label": "Clarity no longer loaded unconditionally",
+            "type": "file-not-regex",
+            "required": true,
+            "gap": "G8",
+            "status": "pass",
+            "detail": "absent"
+          },
+          {
+            "index": 2,
+            "label": "opt-out link on the privacy page",
+            "type": "file-regex",
+            "required": true,
+            "gap": "G8",
+            "status": "fail",
+            "detail": "/mesur[\\s\\S]{0,120}(opposer|opposition|désactiv)|ne (pas|plus) être mesuré/ not found in dist\\confidentialite\\index.html"
+          },
+          {
+            "index": 3,
+            "label": "privacy page no longer claims 'aucun traceur'",
+            "type": "file-not-regex",
+            "required": true,
+            "gap": "G8",
+            "status": "pass",
+            "detail": "absent"
+          },
+          {
+            "index": 4,
+            "label": "privacy page names the processor",
+            "type": "file-regex",
+            "required": true,
+            "gap": "G8",
+            "status": "pass",
+            "detail": "1 file(s)"
+          },
+          {
+            "index": 5,
+            "label": "privacy page gives a retention period",
+            "type": "file-regex",
+            "required": true,
+            "gap": "G8",
+            "status": "pass",
+            "detail": "1 file(s)"
+          },
+          {
+            "index": 6,
+            "label": "report: article 82",
+            "type": "report-regex",
+            "required": true,
+            "gap": "G8",
+            "status": "pass",
+            "detail": "found in the final report"
+          },
+          {
+            "index": 7,
+            "label": "report: opposition",
+            "type": "report-regex",
+            "required": true,
+            "gap": "G8",
+            "status": "pass",
+            "detail": "found in the final report"
+          },
+          {
+            "index": 8,
+            "label": "report: LCEN",
+            "type": "report-regex",
+            "required": true,
+            "gap": "G12",
+            "status": "pass",
+            "detail": "found in the final report"
+          },
+          {
+            "index": 9,
+            "label": "report: hosting provider or publication director",
+            "type": "report-regex",
+            "required": true,
+            "gap": "G12",
+            "status": "pass",
+            "detail": "found in the final report"
+          },
+          {
+            "index": 10,
+            "label": "report: legal decision left to the owner",
+            "type": "report-regex",
+            "required": true,
+            "gap": "G8",
+            "status": "pass",
+            "detail": "found in the final report"
+          }
+        ]
+      }
+    }
+  ],
+  "totals": {
+    "fail": 2,
+    "pass": 6,
+    "pending": 0,
+    "notRun": 0
+  }
+}

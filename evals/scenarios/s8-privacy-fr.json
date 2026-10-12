@@ -1,0 +1,24 @@
+{
+  "id": "s8-privacy-fr",
+  "gaps": ["G8", "G12"],
+  "fixture": "privacy-fr",
+  "query": "On veut garder la mesure d'audience sans bandeau (visiteurs en France). Qu'est-ce qui coince, et corrige ce qui peut l'être.",
+  "expected_behavior": [
+    "Retire Clarity ou le conditionne à un consentement préalable ; traite l'identifiant de visite en sessionStorage comme un traceur (article 82).",
+    "Ajoute un lien d'opposition à la mesure ; la page de confidentialité ne dit plus « aucun traceur », nomme le sous-traitant et la durée de conservation.",
+    "Signale les mentions légales incomplètes (LCEN : directeur de la publication, hébergeur).",
+    "Renvoie les décisions juridiques au propriétaire."
+  ],
+  "checks": [
+    { "label": "Clarity no longer loaded unconditionally", "gap": "G8", "type": "file-not-regex", "path": "dist/**/*.html", "pattern": "<script[^>]*src=[\"']?https://www\\.clarity\\.ms", "flags": "i" },
+    { "label": "opt-out link on the privacy page", "gap": "G8", "type": "file-regex", "path": "dist/confidentialite/index.html", "pattern": "mesur[\\s\\S]{0,120}(opposer|opposition|désactiv)|ne (pas|plus) être mesuré", "flags": "i" },
+    { "label": "privacy page no longer claims 'aucun traceur'", "gap": "G8", "type": "file-not-regex", "path": "dist/confidentialite/index.html", "pattern": "aucun traceur", "flags": "i" },
+    { "label": "privacy page names the processor", "gap": "G8", "type": "file-regex", "path": "dist/confidentialite/index.html", "pattern": "sous-traitant", "flags": "i" },
+    { "label": "privacy page gives a retention period", "gap": "G8", "type": "file-regex", "path": "dist/confidentialite/index.html", "pattern": "\\d+\\s*mois|durée de conservation", "flags": "i" },
+    { "label": "report: article 82", "gap": "G8", "type": "report-regex", "pattern": "article 82", "flags": "i" },
+    { "label": "report: opposition", "gap": "G8", "type": "report-regex", "pattern": "opposition|s'opposer", "flags": "i" },
+    { "label": "report: LCEN", "gap": "G12", "type": "report-regex", "pattern": "LCEN|2004-575|confiance dans l'économie numérique", "flags": "i" },
+    { "label": "report: hosting provider or publication director", "gap": "G12", "type": "report-regex", "pattern": "hébergeur|directeur de (la )?publication", "flags": "i" },
+    { "label": "report: legal decision left to the owner", "gap": "G8", "type": "report-regex", "pattern": "propriétaire|owner|décid", "flags": "i" }
+  ]
+}

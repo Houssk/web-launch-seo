@@ -1,0 +1,6 @@
+# AI crawler policy: search and retrieval crawlers are allowed so that answers can cite the site.
+# Training crawlers: allowed (owner decision, reviewed before launch).
+User-agent: *
+Allow: /
+
+Sitemap: https://acme-widgets.test/sitemap.xml

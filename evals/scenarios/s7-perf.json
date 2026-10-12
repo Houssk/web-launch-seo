@@ -1,0 +1,90 @@
+{
+  "id": "s7-perf",
+  "gaps": [
+    "G10"
+  ],
+  "fixture": "headers-perf",
+  "query": "Mobile Lighthouse shows CLS 0.12 and performance 91. Fix what you can and tell me how to measure.",
+  "expected_behavior": [
+    "Gives the hero image width and height, pairs content-visibility with contain-intrinsic-size (or removes it), self-hosts or drops the Google Fonts stylesheet, defers the head script.",
+    "Talks about INP (not FID) and field data, and measures the median of several Lighthouse runs."
+  ],
+  "checks": [
+    {
+      "label": "check-site: IMG-001, CSS-001, PERF-001 gone",
+      "gap": "G10",
+      "type": "check-site",
+      "args": [
+        "--dist",
+        "dist",
+        "--site",
+        "https://acme-widgets.test"
+      ],
+      "mustNotFind": [
+        "IMG-001",
+        "CSS-001",
+        "PERF-001"
+      ]
+    },
+    {
+      "label": "home images have width and height",
+      "gap": "G10",
+      "type": "file-not-regex",
+      "path": "dist/index.html",
+      "pattern": "<img(?![^>]*\\bwidth=)[^>]*>|<img(?![^>]*\\bheight=)[^>]*>",
+      "flags": "i"
+    },
+    {
+      "label": "content-visibility paired with contain-intrinsic-size (or removed)",
+      "gap": "G10",
+      "type": "any",
+      "checks": [
+        {
+          "type": "file-regex",
+          "path": "dist/assets/site.css",
+          "pattern": "contain-intrinsic-size"
+        },
+        {
+          "type": "file-not-regex",
+          "path": "dist/assets/site.css",
+          "pattern": "content-visibility"
+        }
+      ]
+    },
+    {
+      "label": "no Google Fonts stylesheet",
+      "gap": "G10",
+      "type": "file-not-regex",
+      "path": "dist/index.html",
+      "pattern": "fonts\\.googleapis\\.com/css"
+    },
+    {
+      "label": "no blocking external script",
+      "gap": "G10",
+      "type": "file-not-regex",
+      "path": "dist/index.html",
+      "pattern": "<script(?![^>]*\\b(defer|async)\\b)(?![^>]*type=[\"']?module)[^>]*\\bsrc=",
+      "flags": "i"
+    },
+    {
+      "label": "report talks about INP",
+      "gap": "G10",
+      "type": "report-regex",
+      "pattern": "\\bINP\\b"
+    },
+    {
+      "label": "report does not present FID as a current metric",
+      "gap": "G10",
+      "type": "report-not-regex",
+      "pattern": "^(?![^\\n]*(replac|deprecat|former|retired|no longer|old|remplac|remplaç|obsolète|ancien|retiré|n'est plus|succède|successeur|abandonn|déprécié))[^\\n]*\\bFID\\b",
+      "flags": "im"
+    },
+    {
+      "label": "report: median of several runs",
+      "gap": "G10",
+      "type": "report-regex",
+      "pattern": "median|médiane",
+      "flags": "i"
+    }
+  ]
+}

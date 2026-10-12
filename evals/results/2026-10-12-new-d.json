@@ -1,0 +1,124 @@
+{
+  "campaign": "2026-10-12-new-d",
+  "variant": "new",
+  "model": "claude-sonnet-5-5",
+  "claudeVersion": "2.1.296 (Claude Code)",
+  "repoSha": "5957bb5",
+  "skill": "content-eb49a1fab56d",
+  "date": "2026-10-12",
+  "runBudgetUsd": 0.55,
+  "campaignBudgetUsd": 0.71,
+  "maxTurns": 40,
+  "spentUsd": 0.16468649999999999,
+  "stoppedBecause": null,
+  "runs": [
+    {
+      "scenario": "s7-perf",
+      "rep": 1,
+      "state": "run",
+      "exitCode": 0,
+      "costUsd": 0.16468649999999999,
+      "turns": 16,
+      "durationMs": 44350,
+      "isError": false,
+      "subtype": "success",
+      "terminalReason": "completed",
+      "models": [
+        "claude-sonnet-5-5"
+      ],
+      "isolation": {
+        "notes": [],
+        "violations": []
+      },
+      "grade": {
+        "scenario": "s7-perf",
+        "status": "pass",
+        "counts": {
+          "pass": 8,
+          "fail": 0,
+          "pending": 0
+        },
+        "checks": [
+          {
+            "index": 1,
+            "label": "check-site: IMG-001, CSS-001, PERF-001 gone",
+            "type": "check-site",
+            "required": true,
+            "gap": "G10",
+            "status": "pass",
+            "detail": "5 errors, 4 warnings"
+          },
+          {
+            "index": 2,
+            "label": "home images have width and height",
+            "type": "file-not-regex",
+            "required": true,
+            "gap": "G10",
+            "status": "pass",
+            "detail": "absent"
+          },
+          {
+            "index": 3,
+            "label": "content-visibility paired with contain-intrinsic-size (or removed)",
+            "type": "any",
+            "required": true,
+            "gap": "G10",
+            "status": "pass",
+            "detail": "pass/fail"
+          },
+          {
+            "index": 4,
+            "label": "no Google Fonts stylesheet",
+            "type": "file-not-regex",
+            "required": true,
+            "gap": "G10",
+            "status": "pass",
+            "detail": "absent"
+          },
+          {
+            "index": 5,
+            "label": "no blocking external script",
+            "type": "file-not-regex",
+            "required": true,
+            "gap": "G10",
+            "status": "pass",
+            "detail": "absent"
+          },
+          {
+            "index": 6,
+            "label": "report talks about INP",
+            "type": "report-regex",
+            "required": true,
+            "gap": "G10",
+            "status": "pass",
+            "detail": "found in the final report"
+          },
+          {
+            "index": 7,
+            "label": "report does not present FID as a current metric",
+            "type": "report-not-regex",
+            "required": true,
+            "gap": "G10",
+            "status": "pass",
+            "detail": "absent"
+          },
+          {
+            "index": 8,
+            "label": "report: median of several runs",
+            "type": "report-regex",
+            "required": true,
+            "gap": "G10",
+            "status": "pass",
+            "detail": "found in the final report"
+          }
+        ]
+      }
+    }
+  ],
+  "totals": {
+    "fail": 0,
+    "pass": 1,
+    "pending": 0,
+    "notRun": 0
+  }
+}

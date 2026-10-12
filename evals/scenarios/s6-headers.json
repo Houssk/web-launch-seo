@@ -1,0 +1,19 @@
+{
+  "id": "s6-headers",
+  "gaps": ["G9"],
+  "fixture": "headers-perf",
+  "query": "Harden the security headers before launch; Lighthouse best-practices must stay at 100.",
+  "expected_behavior": [
+    "Adds CSP, Referrer-Policy and Permissions-Policy on every HTML response; no 'unsafe-inline' in script-src; the inline script is allowed by its exact sha256 (or moved to a file).",
+    "Notices that _headers does not apply to the Worker relay: the relay sets X-Content-Type-Options itself and strips set-cookie.",
+    "Says so in the report."
+  ],
+  "checks": [
+    { "label": "check-site: HEADERS-001, CSP-001, CSP-002 gone", "gap": "G9", "type": "check-site", "args": ["--dist", "dist", "--site", "https://acme-widgets.test"], "mustNotFind": ["HEADERS-001", "CSP-001", "CSP-002"], "severities": ["error"] },
+    { "label": "_headers sets CSP, Referrer-Policy and Permissions-Policy", "gap": "G9", "type": "file-regex", "path": "dist/_headers", "pattern": "^(?=[\\s\\S]*Content-Security-Policy)(?=[\\s\\S]*Referrer-Policy)(?=[\\s\\S]*Permissions-Policy)", "flags": "i" },
+    { "label": "no 'unsafe-inline' in script-src", "gap": "G9", "type": "file-not-regex", "path": "dist/_headers", "pattern": "script-src[^\\n;]*'unsafe-inline'", "flags": "i" },
+    { "label": "the Worker relay sets X-Content-Type-Options itself", "gap": "G9", "type": "file-regex", "path": "worker/ingest-proxy.mjs", "pattern": "X-Content-Type-Options", "flags": "i" },
+    { "label": "the Worker relay strips set-cookie", "gap": "G9", "type": "file-regex", "path": "worker/ingest-proxy.mjs", "pattern": "(delete|remove)[^\\n]{0,40}set-cookie|set-cookie[^\\n]{0,40}(delete|remove)", "flags": "i" },
+    { "label": "report: _headers does not cover the Worker", "gap": "G9", "type": "report-regex", "pattern": "_headers.*Worker|Worker.*_headers", "flags": "i" }
+  ]
+}
