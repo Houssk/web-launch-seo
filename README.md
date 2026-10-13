@@ -41,4 +41,8 @@ Protocol of the agent scenarios: [`evals/README.md`](./evals/README.md).
 
 ## License
 
-[MIT](./LICENSE)
+[MIT](./LICENSE) — use it, adapt it, ship better sites.
+
+## Claudemarket
+
+Listed in the [Claude Market skill directory](https://www.claudemarket.ai/skills)
