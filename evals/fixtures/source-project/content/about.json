@@ -1,0 +1,12 @@
+{
+  "path": "/about/",
+  "nav": "About",
+  "title": "About Acme Widgets",
+  "description": "Who builds Acme Widgets, how the workshop is organised, and why every widget is designed to be repaired rather than replaced.",
+  "h1": "About Acme Widgets",
+  "updated": "2026-09-15",
+  "body": [
+    "Acme Widgets is a small team of mechanical designers who got tired of throwing away tools that broke at one joint.",
+    "The workshop keeps spare parts for every widget it has ever sold, for at least ten years."
+  ]
+}

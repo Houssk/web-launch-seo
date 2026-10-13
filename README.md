@@ -1,40 +1,43 @@
 # web-launch-seo
 
-A reusable **[Claude Code](https://claude.com/claude-code) skill** + universal playbook to build, launch, and keep optimizing a fast, well-referenced website — **SEO, GEO (LLM visibility), performance, i18n, deployment and monitoring** — plus the per-article publishing routine.
+A **[Claude Code](https://claude.com/claude-code) skill** to launch and harden static marketing and content sites for search engines and AI answers: pre-launch indexing switch and staging, build guards and their tests, structured data, keyword research without paid tools, AI crawlers and GEO, security headers, Core Web Vitals, French privacy and legal notices, Cloudflare settings, post-deploy checks and the per-article routine.
 
-Reference stack: **[Astro](https://astro.build) static site + Cloudflare**, trilingual, Lighthouse 100×4. The checklists apply to any static-site stack.
+Reference stack: [Astro](https://astro.build) static site + Cloudflare. The rules apply to any static-site stack.
 
 ## What's inside
 
-The full playbook lives in [`SKILL.md`](./SKILL.md), organized in 10 reusable sections:
+- [`SKILL.md`](./SKILL.md): the short operating guide (phase router, checker, guardrails, report format).
+- [`references/`](./references): one file per moment of the work, loaded on demand. Every factual rule carries its source and read date; unsourced advice is labelled "Recommendation (unsourced)".
+- [`scripts/check-site.mjs`](./scripts/check-site.mjs): a zero-dependency checker (Node 20+) with 45 checks (robots.txt, sitemap, canonicals, indexability, placeholders, Open Graph, JSON-LD, entity name, links, soft 404, security headers, CSP hashes, images, CSS, render-blocking resources, trackers, llms.txt, redirects).
+- [`evals/`](./evals): the test bench (fixture sites with planted defects, agent scenarios, deterministic grader).
 
-1. **Foundations** — static-first, content collections + schema validation, no inline CSS, self-hosted fonts, Lighthouse-100 budget
-2. **On-page SEO** — titles/descriptions, canonical, Open Graph, Twitter cards, JSON-LD (Article/FAQ/Breadcrumb), robots, sitemap + `lastmod`
-3. **GEO** — `llms.txt`, citable content, authoritative sources, English content, Bing → ChatGPT/Copilot
-4. **Internationalization** — typed dictionary pattern, per-page hreflang, `translationKey` pairing, localized taxonomy
-5. **Content architecture** — content collection with `lang`/`translationKey`, RSS feeds, internal linking, accuracy guardrails
-6. **Deployment & Cloudflare hardening** — Always Use HTTPS, HSTS, www→apex, Crawler Hints (IndexNow), Early Hints, Tiered Cache
-7. **Per-new-page/article routine** — the recurring publishing checklist
-8. **Monitoring** — Search Console, Bing Webmaster, Cloudflare Web Analytics, Clarity
-9. **Non-negotiable guardrails** — no inline CSS, factual accuracy, GDPR/cookies, legal pages
-10. **Launch sequence** — the condensed order of operations
+## Use the checker
+
+```bash
+node scripts/check-site.mjs --dist dist --site https://example.com                      # before deploying
+node scripts/check-site.mjs --dist dist --site https://staging.example.com --mode staging
+node scripts/check-site.mjs --url https://example.com --domain example.com --json report.json   # after deploying
+```
+
+Exit code 0 = no error, 1 = errors, 2 = invalid usage or unreachable origin.
 
 ## Install as a Claude Code skill
-
-Clone it into your Claude Code skills directory so it's auto-discovered in **every** project:
 
 ```bash
 git clone https://github.com/Houssk/web-launch-seo ~/.claude/skills/web-launch-seo
 ```
 
-(On Windows: `%USERPROFILE%\.claude\skills\web-launch-seo`.)
+Then type `/web-launch-seo`, or ask "help me launch this site" and the skill triggers.
 
-## Usage
+## Tests
 
-In any Claude Code session:
+```bash
+node --test scripts/test/check-site.test.mjs scripts/test/skill-structure.test.mjs
+node --test evals/test/grade.test.mjs
+node evals/run.mjs --variant new --dry-run
+```
 
-- Type **`/web-launch-seo`**, or
-- Just ask — *"help me launch/optimize the SEO for this site"* — and the skill triggers automatically.
+Protocol of the agent scenarios: [`evals/README.md`](./evals/README.md).
 
 ## License
 
@@ -43,4 +46,3 @@ In any Claude Code session:
 ## Claudemarket
 
 Listed in the [Claude Market skill directory](https://www.claudemarket.ai/skills)
-

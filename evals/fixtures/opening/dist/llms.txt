@@ -1,0 +1,8 @@
+# Acme Widgets
+
+> Acme Widgets designs modular, repairable widgets for small workshops.
+
+## Pages
+
+- [About Acme Widgets](https://acme-widgets.test/about/): who builds the widgets and why they are repairable
+- [How we test a widget before it ships](https://acme-widgets.test/blog/first-widget/): the five bench checks

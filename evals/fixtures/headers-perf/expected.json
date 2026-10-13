@@ -1,0 +1,10 @@
+{
+  "fixture": "headers-perf",
+  "kind": "dist",
+  "mode": "launch",
+  "site": "https://acme-widgets.test",
+  "errors": ["CSP-001", "CSP-002", "HEADERS-001"],
+  "warnings": ["CSS-001", "IMG-001", "PERF-001"],
+  "allowedWarnings": ["HEADERS-001"],
+  "infos": []
+}

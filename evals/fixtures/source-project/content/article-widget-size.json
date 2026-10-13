@@ -1,0 +1,15 @@
+{
+  "path": "/blog/choosing-a-widget-size/",
+  "nav": "Blog",
+  "type": "article",
+  "title": "How to choose the right widget size for your bench",
+  "description": "A practical guide to sizing a modular widget for a small workshop bench: load, reach, clamping width and the space you need around it.",
+  "h1": "How to choose the right widget size for your bench",
+  "published": "2026-09-20T09:00:00+02:00",
+  "updated": "2026-10-02T09:00:00+02:00",
+  "body": [
+    "Start from the heaviest part you clamp every week, not from the bench size.",
+    "A widget that is too wide for the bench blocks the vice; one that is too narrow wobbles under load.",
+    "Measure the reach you need, then add the width of the clamping jaws."
+  ]
+}

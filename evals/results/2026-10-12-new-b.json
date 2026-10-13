@@ -1,0 +1,337 @@
+{
+  "campaign": "2026-10-12-new-b",
+  "variant": "new",
+  "model": "claude-sonnet-5-5",
+  "claudeVersion": "2.1.296 (Claude Code)",
+  "repoSha": "944222c",
+  "skill": "content-6be259eb7131",
+  "date": "2026-10-12",
+  "runBudgetUsd": 0.55,
+  "campaignBudgetUsd": 1.47,
+  "maxTurns": 40,
+  "spentUsd": 0.5453057,
+  "stoppedBecause": null,
+  "runs": [
+    {
+      "scenario": "s4-schema",
+      "rep": 1,
+      "state": "run",
+      "exitCode": 0,
+      "costUsd": 0.19673810000000003,
+      "turns": 18,
+      "durationMs": 119993,
+      "isError": false,
+      "subtype": "success",
+      "terminalReason": "completed",
+      "models": [
+        "claude-sonnet-5-5"
+      ],
+      "isolation": {
+        "notes": [],
+        "violations": []
+      },
+      "grade": {
+        "scenario": "s4-schema",
+        "status": "pass",
+        "counts": {
+          "pass": 7,
+          "fail": 0,
+          "pending": 0
+        },
+        "checks": [
+          {
+            "index": 1,
+            "label": "check-site: JSON-LD errors and warnings gone",
+            "type": "check-site",
+            "required": true,
+            "gap": "G6",
+            "status": "pass",
+            "detail": "0 errors, 3 warnings"
+          },
+          {
+            "index": 2,
+            "label": "no aggregateRating without visible reviews",
+            "type": "file-not-regex",
+            "required": true,
+            "gap": "G6",
+            "status": "pass",
+            "detail": "absent"
+          },
+          {
+            "index": 3,
+            "label": "Article has dateModified",
+            "type": "file-regex",
+            "required": true,
+            "gap": "G6",
+            "status": "pass",
+            "detail": "1 file(s)"
+          },
+          {
+            "index": 4,
+            "label": "no relative URL in JSON-LD",
+            "type": "file-not-regex",
+            "required": true,
+            "gap": "G6",
+            "status": "pass",
+            "detail": "absent"
+          },
+          {
+            "index": 5,
+            "label": "logo is not the SVG favicon",
+            "type": "file-not-regex",
+            "required": true,
+            "gap": "G6",
+            "status": "pass",
+            "detail": "absent"
+          },
+          {
+            "index": 6,
+            "label": "report: FAQ rich results are gone",
+            "type": "report-regex",
+            "required": true,
+            "gap": "G6",
+            "status": "pass",
+            "detail": "found in the final report"
+          },
+          {
+            "index": 7,
+            "label": "report: no promise of FAQ rich results",
+            "type": "report-not-regex",
+            "required": true,
+            "gap": "G6",
+            "status": "pass",
+            "detail": "absent"
+          }
+        ]
+      }
+    },
+    {
+      "scenario": "s7-perf",
+      "rep": 1,
+      "state": "run",
+      "exitCode": 0,
+      "costUsd": 0.1478776,
+      "turns": 13,
+      "durationMs": 38118,
+      "isError": false,
+      "subtype": "success",
+      "terminalReason": "completed",
+      "models": [
+        "claude-sonnet-5-5"
+      ],
+      "isolation": {
+        "notes": [],
+        "violations": []
+      },
+      "grade": {
+        "scenario": "s7-perf",
+        "status": "pass",
+        "counts": {
+          "pass": 8,
+          "fail": 0,
+          "pending": 0
+        },
+        "checks": [
+          {
+            "index": 1,
+            "label": "check-site: IMG-001, CSS-001, PERF-001 gone",
+            "type": "check-site",
+            "required": true,
+            "gap": "G10",
+            "status": "pass",
+            "detail": "5 errors, 4 warnings"
+          },
+          {
+            "index": 2,
+            "label": "home images have width and height",
+            "type": "file-not-regex",
+            "required": true,
+            "gap": "G10",
+            "status": "pass",
+            "detail": "absent"
+          },
+          {
+            "index": 3,
+            "label": "content-visibility paired with contain-intrinsic-size (or removed)",
+            "type": "any",
+            "required": true,
+            "gap": "G10",
+            "status": "pass",
+            "detail": "pass/fail"
+          },
+          {
+            "index": 4,
+            "label": "no Google Fonts stylesheet",
+            "type": "file-not-regex",
+            "required": true,
+            "gap": "G10",
+            "status": "pass",
+            "detail": "absent"
+          },
+          {
+            "index": 5,
+            "label": "no blocking external script",
+            "type": "file-not-regex",
+            "required": true,
+            "gap": "G10",
+            "status": "pass",
+            "detail": "absent"
+          },
+          {
+            "index": 6,
+            "label": "report talks about INP",
+            "type": "report-regex",
+            "required": true,
+            "gap": "G10",
+            "status": "pass",
+            "detail": "found in the final report"
+          },
+          {
+            "index": 7,
+            "label": "report does not present FID as a current metric",
+            "type": "report-not-regex",
+            "required": true,
+            "gap": "G10",
+            "status": "pass",
+            "detail": "absent"
+          },
+          {
+            "index": 8,
+            "label": "report: median of several runs",
+            "type": "report-regex",
+            "required": true,
+            "gap": "G10",
+            "status": "pass",
+            "detail": "found in the final report"
+          }
+        ]
+      }
+    },
+    {
+      "scenario": "s8-privacy-fr",
+      "rep": 1,
+      "state": "run",
+      "exitCode": 0,
+      "costUsd": 0.20068999999999998,
+      "turns": 22,
+      "durationMs": 57589,
+      "isError": false,
+      "subtype": "success",
+      "terminalReason": "completed",
+      "models": [
+        "claude-sonnet-5-5"
+      ],
+      "isolation": {
+        "notes": [],
+        "violations": []
+      },
+      "grade": {
+        "scenario": "s8-privacy-fr",
+        "status": "fail",
+        "counts": {
+          "pass": 8,
+          "fail": 2,
+          "pending": 0
+        },
+        "checks": [
+          {
+            "index": 1,
+            "label": "Clarity no longer loaded unconditionally",
+            "type": "file-not-regex",
+            "required": true,
+            "gap": "G8",
+            "status": "pass",
+            "detail": "absent"
+          },
+          {
+            "index": 2,
+            "label": "opt-out link on the privacy page",
+            "type": "file-regex",
+            "required": true,
+            "gap": "G8",
+            "status": "pass",
+            "detail": "1 file(s)"
+          },
+          {
+            "index": 3,
+            "label": "privacy page no longer claims 'aucun traceur'",
+            "type": "file-not-regex",
+            "required": true,
+            "gap": "G8",
+            "status": "pass",
+            "detail": "absent"
+          },
+          {
+            "index": 4,
+            "label": "privacy page names the processor",
+            "type": "file-regex",
+            "required": true,
+            "gap": "G8",
+            "status": "fail",
+            "detail": "/sous-traitant/ not found in dist\\confidentialite\\index.html"
+          },
+          {
+            "index": 5,
+            "label": "privacy page gives a retention period",
+            "type": "file-regex",
+            "required": true,
+            "gap": "G8",
+            "status": "fail",
+            "detail": "/\\d+\\s*mois|durée de conservation/ not found in dist\\confidentialite\\index.html"
+          },
+          {
+            "index": 6,
+            "label": "report: article 82",
+            "type": "report-regex",
+            "required": true,
+            "gap": "G8",
+            "status": "pass",
+            "detail": "found in the final report"
+          },
+          {
+            "index": 7,
+            "label": "report: opposition",
+            "type": "report-regex",
+            "required": true,
+            "gap": "G8",
+            "status": "pass",
+            "detail": "found in the final report"
+          },
+          {
+            "index": 8,
+            "label": "report: LCEN",
+            "type": "report-regex",
+            "required": true,
+            "gap": "G12",
+            "status": "pass",
+            "detail": "found in the final report"
+          },
+          {
+            "index": 9,
+            "label": "report: hosting provider or publication director",
+            "type": "report-regex",
+            "required": true,
+            "gap": "G12",
+            "status": "pass",
+            "detail": "found in the final report"
+          },
+          {
+            "index": 10,
+            "label": "report: legal decision left to the owner",
+            "type": "report-regex",
+            "required": true,
+            "gap": "G8",
+            "status": "pass",
+            "detail": "found in the final report"
+          }
+        ]
+      }
+    }
+  ],
+  "totals": {
+    "fail": 1,
+    "pass": 2,
+    "pending": 0,
+    "notRun": 0
+  }
+}

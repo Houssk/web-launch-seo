@@ -1,0 +1,12 @@
+{
+  "path": "/",
+  "nav": "Home",
+  "title": "Acme Widgets: modular widgets for small workshops",
+  "description": "Acme Widgets designs modular, repairable widgets for small workshops, with open dimensions and spare parts kept in stock for ten years.",
+  "h1": "Modular widgets for small workshops",
+  "updated": "2026-09-01",
+  "body": [
+    "Every Acme widget is built from the same twelve parts, so a workshop can repair, extend or resize it with a screwdriver.",
+    "Our customers are woodworking, bicycle repair and electronics workshops with fewer than ten people."
+  ]
+}

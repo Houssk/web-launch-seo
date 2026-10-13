@@ -1,0 +1,328 @@
+{
+  "campaign": "2026-10-12-none-c",
+  "variant": "none",
+  "model": "claude-sonnet-5-5",
+  "claudeVersion": "2.1.296 (Claude Code)",
+  "repoSha": "02d6447",
+  "skill": "none",
+  "date": "2026-10-12",
+  "runBudgetUsd": 1,
+  "campaignBudgetUsd": 2.4,
+  "maxTurns": 40,
+  "spentUsd": 0.3337992,
+  "stoppedBecause": null,
+  "runs": [
+    {
+      "scenario": "s6-headers",
+      "rep": 1,
+      "state": "run",
+      "exitCode": 0,
+      "costUsd": 0.1422309,
+      "turns": 15,
+      "durationMs": 41050,
+      "isError": false,
+      "subtype": "success",
+      "terminalReason": "completed",
+      "models": [
+        "claude-sonnet-5-5"
+      ],
+      "isolation": {
+        "notes": [],
+        "violations": []
+      },
+      "grade": {
+        "scenario": "s6-headers",
+        "status": "fail",
+        "counts": {
+          "pass": 5,
+          "fail": 1,
+          "pending": 0
+        },
+        "checks": [
+          {
+            "index": 1,
+            "label": "check-site: HEADERS-001, CSP-001, CSP-002 gone",
+            "type": "check-site",
+            "required": true,
+            "gap": "G9",
+            "status": "pass",
+            "detail": "0 errors, 3 warnings"
+          },
+          {
+            "index": 2,
+            "label": "_headers sets CSP, Referrer-Policy and Permissions-Policy",
+            "type": "file-regex",
+            "required": true,
+            "gap": "G9",
+            "status": "pass",
+            "detail": "1 file(s)"
+          },
+          {
+            "index": 3,
+            "label": "no 'unsafe-inline' in script-src",
+            "type": "file-not-regex",
+            "required": true,
+            "gap": "G9",
+            "status": "pass",
+            "detail": "absent"
+          },
+          {
+            "index": 4,
+            "label": "the Worker relay sets X-Content-Type-Options itself",
+            "type": "file-regex",
+            "required": true,
+            "gap": "G9",
+            "status": "pass",
+            "detail": "1 file(s)"
+          },
+          {
+            "index": 5,
+            "label": "the Worker relay strips set-cookie",
+            "type": "file-regex",
+            "required": true,
+            "gap": "G9",
+            "status": "fail",
+            "detail": "/(delete|remove)[^\\n]{0,40}set-cookie|set-cookie[^\\n]{0,40}(delete|remove)/ not found in worker\\ingest-proxy.mjs"
+          },
+          {
+            "index": 6,
+            "label": "report: _headers does not cover the Worker",
+            "type": "report-regex",
+            "required": true,
+            "gap": "G9",
+            "status": "pass",
+            "detail": "found in the final report"
+          }
+        ]
+      }
+    },
+    {
+      "scenario": "s7-perf",
+      "rep": 1,
+      "state": "run",
+      "exitCode": 0,
+      "costUsd": 0.09463099999999999,
+      "turns": 13,
+      "durationMs": 25898,
+      "isError": false,
+      "subtype": "success",
+      "terminalReason": "completed",
+      "models": [
+        "claude-sonnet-5-5"
+      ],
+      "isolation": {
+        "notes": [],
+        "violations": []
+      },
+      "grade": {
+        "scenario": "s7-perf",
+        "status": "fail",
+        "counts": {
+          "pass": 5,
+          "fail": 3,
+          "pending": 0
+        },
+        "checks": [
+          {
+            "index": 1,
+            "label": "check-site: IMG-001, CSS-001, PERF-001 gone",
+            "type": "check-site",
+            "required": true,
+            "gap": "G10",
+            "status": "fail",
+            "detail": "CSS-001 still reported (https://acme-widgets.test/assets/site.css)"
+          },
+          {
+            "index": 2,
+            "label": "home images have width and height",
+            "type": "file-not-regex",
+            "required": true,
+            "gap": "G10",
+            "status": "pass",
+            "detail": "absent"
+          },
+          {
+            "index": 3,
+            "label": "content-visibility paired with contain-intrinsic-size (or removed)",
+            "type": "any",
+            "required": true,
+            "gap": "G10",
+            "status": "fail",
+            "detail": "/contain-intrinsic-size/ not found in dist\\assets\\site.css | forbidden text: dist\\assets\\site.css: \"content-visibility\""
+          },
+          {
+            "index": 4,
+            "label": "no Google Fonts stylesheet",
+            "type": "file-not-regex",
+            "required": true,
+            "gap": "G10",
+            "status": "pass",
+            "detail": "absent"
+          },
+          {
+            "index": 5,
+            "label": "no blocking external script",
+            "type": "file-not-regex",
+            "required": true,
+            "gap": "G10",
+            "status": "pass",
+            "detail": "absent"
+          },
+          {
+            "index": 6,
+            "label": "report talks about INP",
+            "type": "report-regex",
+            "required": true,
+            "gap": "G10",
+            "status": "fail",
+            "detail": "/\\bINP\\b/ not found in the final report"
+          },
+          {
+            "index": 7,
+            "label": "report does not present FID as a current metric",
+            "type": "report-not-regex",
+            "required": true,
+            "gap": "G10",
+            "status": "pass",
+            "detail": "absent"
+          },
+          {
+            "index": 8,
+            "label": "report: median of several runs",
+            "type": "report-regex",
+            "required": true,
+            "gap": "G10",
+            "status": "pass",
+            "detail": "found in the final report"
+          }
+        ]
+      }
+    },
+    {
+      "scenario": "s8-privacy-fr",
+      "rep": 1,
+      "state": "run",
+      "exitCode": 0,
+      "costUsd": 0.09693730000000002,
+      "turns": 9,
+      "durationMs": 32032,
+      "isError": false,
+      "subtype": "success",
+      "terminalReason": "completed",
+      "models": [
+        "claude-sonnet-5-5"
+      ],
+      "isolation": {
+        "notes": [],
+        "violations": []
+      },
+      "grade": {
+        "scenario": "s8-privacy-fr",
+        "status": "fail",
+        "counts": {
+          "pass": 0,
+          "fail": 10,
+          "pending": 0
+        },
+        "checks": [
+          {
+            "index": 1,
+            "label": "Clarity no longer loaded unconditionally",
+            "type": "file-not-regex",
+            "required": true,
+            "gap": "G8",
+            "status": "fail",
+            "detail": "forbidden text: dist\\404.html: \"<script async src=\"https://www.clarity.ms\"; dist\\a-propos\\index.html: \"<script async src=\"https://www.clarity.ms\"; dist\\confidentialite\\index.html: \"<script async src=\"https://www.clarity.ms\"; dist\\index.html: \"<script async src=\"https://www.clarity.ms\"; dist\\mentions-legales\\index.html: \"<script async src=\"https://www.clarity.ms\""
+          },
+          {
+            "index": 2,
+            "label": "opt-out link on the privacy page",
+            "type": "file-regex",
+            "required": true,
+            "gap": "G8",
+            "status": "fail",
+            "detail": "/mesur[\\s\\S]{0,120}(opposer|opposition|désactiv)|ne (pas|plus) être mesuré/ not found in dist\\confidentialite\\index.html"
+          },
+          {
+            "index": 3,
+            "label": "privacy page no longer claims 'aucun traceur'",
+            "type": "file-not-regex",
+            "required": true,
+            "gap": "G8",
+            "status": "fail",
+            "detail": "forbidden text: dist\\confidentialite\\index.html: \"aucun traceur\""
+          },
+          {
+            "index": 4,
+            "label": "privacy page names the processor",
+            "type": "file-regex",
+            "required": true,
+            "gap": "G8",
+            "status": "fail",
+            "detail": "/sous-traitant/ not found in dist\\confidentialite\\index.html"
+          },
+          {
+            "index": 5,
+            "label": "privacy page gives a retention period",
+            "type": "file-regex",
+            "required": true,
+            "gap": "G8",
+            "status": "fail",
+            "detail": "/\\d+\\s*mois|durée de conservation/ not found in dist\\confidentialite\\index.html"
+          },
+          {
+            "index": 6,
+            "label": "report: article 82",
+            "type": "report-regex",
+            "required": true,
+            "gap": "G8",
+            "status": "fail",
+            "detail": "/article 82/i not found in the final report"
+          },
+          {
+            "index": 7,
+            "label": "report: opposition",
+            "type": "report-regex",
+            "required": true,
+            "gap": "G8",
+            "status": "fail",
+            "detail": "/opposition|s'opposer/i not found in the final report"
+          },
+          {
+            "index": 8,
+            "label": "report: LCEN",
+            "type": "report-regex",
+            "required": true,
+            "gap": "G12",
+            "status": "fail",
+            "detail": "/LCEN|2004-575|confiance dans l'économie numérique/i not found in the final report"
+          },
+          {
+            "index": 9,
+            "label": "report: hosting provider or publication director",
+            "type": "report-regex",
+            "required": true,
+            "gap": "G12",
+            "status": "fail",
+            "detail": "/hébergeur|directeur de (la )?publication/i not found in the final report"
+          },
+          {
+            "index": 10,
+            "label": "report: legal decision left to the owner",
+            "type": "report-regex",
+            "required": true,
+            "gap": "G8",
+            "status": "fail",
+            "detail": "/propriétaire|owner|décid/i not found in the final report"
+          }
+        ]
+      }
+    }
+  ],
+  "totals": {
+    "fail": 3,
+    "pass": 0,
+    "pending": 0,
+    "notRun": 0
+  }
+}

@@ -1,0 +1,223 @@
+{
+  "campaign": "2026-10-12-old-s2-rerun",
+  "variant": "old",
+  "model": "claude-sonnet-5-5",
+  "claudeVersion": "2.1.296 (Claude Code)",
+  "repoSha": "35ac417",
+  "skill": "b947a12",
+  "date": "2026-10-12",
+  "runBudgetUsd": 1,
+  "campaignBudgetUsd": 2,
+  "maxTurns": 40,
+  "spentUsd": 0.40054829999999997,
+  "stoppedBecause": null,
+  "runs": [
+    {
+      "scenario": "s2-build-guards",
+      "rep": 1,
+      "state": "run",
+      "exitCode": 0,
+      "costUsd": 0.40054829999999997,
+      "turns": 14,
+      "durationMs": 133523,
+      "isError": false,
+      "subtype": "success",
+      "terminalReason": "completed",
+      "models": [
+        "claude-sonnet-5-5"
+      ],
+      "isolation": {
+        "notes": [],
+        "violations": []
+      },
+      "grade": {
+        "scenario": "s2-build-guards",
+        "status": "fail",
+        "counts": {
+          "pass": 16,
+          "fail": 3,
+          "pending": 0
+        },
+        "checks": [
+          {
+            "index": 1,
+            "label": "indexable build with an empty SITE_URL fails",
+            "type": "command",
+            "required": true,
+            "gap": "G3",
+            "status": "pass",
+            "detail": "exit 1 (expected nonzero)"
+          },
+          {
+            "index": 2,
+            "label": "indexable build without SITE_URL fails",
+            "type": "command",
+            "required": true,
+            "gap": "G3",
+            "status": "pass",
+            "detail": "exit 1 (expected nonzero)"
+          },
+          {
+            "index": 3,
+            "label": "indexable build on localhost without LIGHTHOUSE_CI fails",
+            "type": "command",
+            "required": true,
+            "gap": "G3",
+            "status": "pass",
+            "detail": "exit 1 (expected nonzero)"
+          },
+          {
+            "index": 4,
+            "label": "indexable build refuses a page with placeholder text",
+            "type": "mutation",
+            "required": true,
+            "gap": "G1",
+            "status": "pass",
+            "detail": "after the mutation: exit 1 (expected nonzero)"
+          },
+          {
+            "index": 5,
+            "label": "Lighthouse CI build (indexable, localhost, LIGHTHOUSE_CI=true) still works",
+            "type": "command",
+            "required": true,
+            "gap": "G3",
+            "status": "fail",
+            "detail": "exit 1 (expected 0): \n> acme-widgets-site@1.0.0 build\n> node build.mjs\n\nBUILD BLOCKED:\n  - SITE_URL http://localhost:4321 is neither production (https://acme-widgets.test) nor staging (https://staging.acme-widgets.test).\n"
+          },
+          {
+            "index": 6,
+            "label": "a test covers the Lighthouse exception (a test file names LIGHTHOUSE_CI)",
+            "type": "any",
+            "required": true,
+            "gap": "G3",
+            "status": "fail",
+            "detail": "/LIGHTHOUSE_CI/ found in none of 1 file(s) matching **/*.test.mjs | no file matches **/*.test.js | no file matches **/*.spec.mjs | no file matches test/**/*.mjs | /LIGHTHOUSE_CI/ found in none of 1 file(s) matching tests/**/*.mjs"
+          },
+          {
+            "index": 7,
+            "label": "production build succeeds",
+            "type": "command",
+            "required": true,
+            "gap": null,
+            "status": "pass",
+            "detail": "exit 0 (expected 0)"
+          },
+          {
+            "index": 8,
+            "label": "check-site on the production build: 0 error",
+            "type": "check-site",
+            "required": true,
+            "gap": "G4",
+            "status": "pass",
+            "detail": "0 errors, 0 warnings"
+          },
+          {
+            "index": 9,
+            "label": "production build: no localhost in pages",
+            "type": "file-not-regex",
+            "required": true,
+            "gap": "G3",
+            "status": "pass",
+            "detail": "absent"
+          },
+          {
+            "index": 10,
+            "label": "production build: no localhost in the sitemap",
+            "type": "file-not-regex",
+            "required": true,
+            "gap": "G3",
+            "status": "pass",
+            "detail": "absent"
+          },
+          {
+            "index": 11,
+            "label": "production build: no localhost in robots.txt",
+            "type": "file-not-regex",
+            "required": true,
+            "gap": "G3",
+            "status": "pass",
+            "detail": "absent"
+          },
+          {
+            "index": 12,
+            "label": "production build: home page indexable",
+            "type": "file-not-regex",
+            "required": true,
+            "gap": "G1",
+            "status": "pass",
+            "detail": "absent"
+          },
+          {
+            "index": 13,
+            "label": "staging build (no PUBLIC_INDEXABLE) succeeds",
+            "type": "command",
+            "required": true,
+            "gap": "G1",
+            "status": "pass",
+            "detail": "exit 0 (expected 0)"
+          },
+          {
+            "index": 14,
+            "label": "check-site --mode staging: 0 error, no ROBOTS-006",
+            "type": "check-site",
+            "required": true,
+            "gap": "G2",
+            "status": "pass",
+            "detail": "0 errors, 1 warnings"
+          },
+          {
+            "index": 15,
+            "label": "staging pages carry noindex (tag or X-Robots-Tag)",
+            "type": "any",
+            "required": true,
+            "gap": "G1",
+            "status": "pass",
+            "detail": "pass/pass"
+          },
+          {
+            "index": 16,
+            "label": "staging robots.txt does not hide the noindex (no Disallow: / for *)",
+            "type": "file-not-regex",
+            "required": true,
+            "gap": "G2",
+            "status": "pass",
+            "detail": "absent"
+          },
+          {
+            "index": 17,
+            "label": "npm test passes",
+            "type": "command",
+            "required": true,
+            "gap": "G4",
+            "status": "pass",
+            "detail": "exit 0 (expected 0)"
+          },
+          {
+            "index": 18,
+            "label": "npm test fails when the original build.mjs is put back",
+            "type": "mutation",
+            "required": true,
+            "gap": "G4",
+            "status": "pass",
+            "detail": "after the mutation: exit 1 (expected nonzero)"
+          },
+          {
+            "index": 19,
+            "label": "npm test checks the built output: fails when the og:image file is missing (OG-001)",
+            "type": "mutation",
+            "required": true,
+            "gap": "G4",
+            "status": "fail",
+            "detail": "after the mutation: exit 0 (expected nonzero): …n URL without the flag (91.6585ms)\n✔ refuses staging URL with the flag (107.7798ms)\n✔ refuses flag that is not \"true\" (92.6058ms)\n✔ refuses unknown host (93.1246ms)\n✔ refuses URL with a path (107.1522ms)\n✔ draft page blocks production but not staging (331.4381ms)\n✔ unfinished copy, local addresses and future articles are blocked in production (784.6203ms)\n✔ localhost in content is blocked in staging too (135.8764ms)\n✔ a localhost URL slipped into public/ is caught by the dist audit (188.1484ms)\nℹ tests 14\nℹ suites 0\nℹ pass 14\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 2817.5281\n"
+          }
+        ]
+      }
+    }
+  ],
+  "totals": {
+    "fail": 1,
+    "pass": 0,
+    "pending": 0,
+    "notRun": 0
+  }
+}

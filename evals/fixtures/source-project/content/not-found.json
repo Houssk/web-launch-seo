@@ -1,0 +1,9 @@
+{
+  "path": "/404.html",
+  "notFound": true,
+  "title": "Page not found | Acme Widgets",
+  "description": "The page you asked for does not exist. Go back to the Acme Widgets home page to find modular widgets.",
+  "h1": "Page not found",
+  "updated": "2026-09-01",
+  "body": ["This page does not exist. Use the menu to go back to the home page."]
+}

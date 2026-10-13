@@ -1,0 +1,5 @@
+# Fixtures and tests are byte-sensitive (hashes, exact text): keep LF everywhere.
+evals/** text eol=lf
+scripts/** text eol=lf
+*.png binary
+*.pem text eol=lf
