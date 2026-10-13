@@ -39,3 +39,8 @@ In any Claude Code session:
 ## License
 
 [MIT](./LICENSE) — use it, adapt it, ship better sites.
+
+## Claudemarket
+
+Listed in the [Claude Market skill directory](https://www.claudemarket.ai/skills)
+
