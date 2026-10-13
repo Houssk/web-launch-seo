@@ -1,0 +1,300 @@
+{
+  "campaign": "2026-10-12-none-b",
+  "variant": "none",
+  "model": "claude-sonnet-5-5",
+  "claudeVersion": "2.1.296 (Claude Code)",
+  "repoSha": "02d6447",
+  "skill": "none",
+  "date": "2026-10-12",
+  "runBudgetUsd": 1,
+  "campaignBudgetUsd": 3.3,
+  "maxTurns": 40,
+  "spentUsd": 0.5451729999999999,
+  "stoppedBecause": "isolation: <watched-memory-repo> changed during the run",
+  "runs": [
+    {
+      "scenario": "s2-build-guards",
+      "rep": 1,
+      "state": "run",
+      "exitCode": 0,
+      "costUsd": 0.3646116999999999,
+      "turns": 25,
+      "durationMs": 119761,
+      "isError": false,
+      "subtype": "success",
+      "terminalReason": "completed",
+      "models": [
+        "claude-sonnet-5-5"
+      ],
+      "isolation": {
+        "notes": [],
+        "violations": []
+      },
+      "grade": {
+        "scenario": "s2-build-guards",
+        "status": "fail",
+        "counts": {
+          "pass": 18,
+          "fail": 1,
+          "pending": 0
+        },
+        "checks": [
+          {
+            "index": 1,
+            "label": "indexable build with an empty SITE_URL fails",
+            "type": "command",
+            "required": true,
+            "gap": "G3",
+            "status": "pass",
+            "detail": "exit 1 (expected nonzero)"
+          },
+          {
+            "index": 2,
+            "label": "indexable build without SITE_URL fails",
+            "type": "command",
+            "required": true,
+            "gap": "G3",
+            "status": "pass",
+            "detail": "exit 1 (expected nonzero)"
+          },
+          {
+            "index": 3,
+            "label": "indexable build on localhost without LIGHTHOUSE_CI fails",
+            "type": "command",
+            "required": true,
+            "gap": "G3",
+            "status": "pass",
+            "detail": "exit 1 (expected nonzero)"
+          },
+          {
+            "index": 4,
+            "label": "indexable build refuses a page with placeholder text",
+            "type": "mutation",
+            "required": true,
+            "gap": "G1",
+            "status": "pass",
+            "detail": "after the mutation: exit 1 (expected nonzero)"
+          },
+          {
+            "index": 5,
+            "label": "Lighthouse CI build (indexable, localhost, LIGHTHOUSE_CI=true) still works",
+            "type": "command",
+            "required": true,
+            "gap": "G3",
+            "status": "pass",
+            "detail": "exit 0 (expected 0)"
+          },
+          {
+            "index": 6,
+            "label": "a test covers the Lighthouse exception (a test file names LIGHTHOUSE_CI)",
+            "type": "any",
+            "required": true,
+            "gap": "G3",
+            "status": "pass",
+            "detail": "pass/fail/fail/fail/fail"
+          },
+          {
+            "index": 7,
+            "label": "production build succeeds",
+            "type": "command",
+            "required": true,
+            "gap": null,
+            "status": "pass",
+            "detail": "exit 0 (expected 0)"
+          },
+          {
+            "index": 8,
+            "label": "check-site on the production build: 0 error",
+            "type": "check-site",
+            "required": true,
+            "gap": "G4",
+            "status": "pass",
+            "detail": "0 errors, 0 warnings"
+          },
+          {
+            "index": 9,
+            "label": "production build: no localhost in pages",
+            "type": "file-not-regex",
+            "required": true,
+            "gap": "G3",
+            "status": "pass",
+            "detail": "absent"
+          },
+          {
+            "index": 10,
+            "label": "production build: no localhost in the sitemap",
+            "type": "file-not-regex",
+            "required": true,
+            "gap": "G3",
+            "status": "pass",
+            "detail": "absent"
+          },
+          {
+            "index": 11,
+            "label": "production build: no localhost in robots.txt",
+            "type": "file-not-regex",
+            "required": true,
+            "gap": "G3",
+            "status": "pass",
+            "detail": "absent"
+          },
+          {
+            "index": 12,
+            "label": "production build: home page indexable",
+            "type": "file-not-regex",
+            "required": true,
+            "gap": "G1",
+            "status": "pass",
+            "detail": "absent"
+          },
+          {
+            "index": 13,
+            "label": "staging build (no PUBLIC_INDEXABLE) succeeds",
+            "type": "command",
+            "required": true,
+            "gap": "G1",
+            "status": "pass",
+            "detail": "exit 0 (expected 0)"
+          },
+          {
+            "index": 14,
+            "label": "check-site --mode staging: 0 error, no ROBOTS-006",
+            "type": "check-site",
+            "required": true,
+            "gap": "G2",
+            "status": "pass",
+            "detail": "0 errors, 6 warnings"
+          },
+          {
+            "index": 15,
+            "label": "staging pages carry noindex (tag or X-Robots-Tag)",
+            "type": "any",
+            "required": true,
+            "gap": "G1",
+            "status": "pass",
+            "detail": "pass/pass"
+          },
+          {
+            "index": 16,
+            "label": "staging robots.txt does not hide the noindex (no Disallow: / for *)",
+            "type": "file-not-regex",
+            "required": true,
+            "gap": "G2",
+            "status": "pass",
+            "detail": "absent"
+          },
+          {
+            "index": 17,
+            "label": "npm test passes",
+            "type": "command",
+            "required": true,
+            "gap": "G4",
+            "status": "pass",
+            "detail": "exit 0 (expected 0)"
+          },
+          {
+            "index": 18,
+            "label": "npm test fails when the original build.mjs is put back",
+            "type": "mutation",
+            "required": true,
+            "gap": "G4",
+            "status": "pass",
+            "detail": "after the mutation: exit 1 (expected nonzero)"
+          },
+          {
+            "index": 19,
+            "label": "npm test checks the built output: fails when the og:image file is missing (OG-001)",
+            "type": "mutation",
+            "required": true,
+            "gap": "G4",
+            "status": "fail",
+            "detail": "after the mutation: exit 0 (expected nonzero): …alhost (136.6079ms)\n✔ staging: noindex everywhere, no sitemap/llms/canonical/JSON-LD, X-Robots-Tag header (112.0873ms)\n✔ lighthouse local indexable build keeps working (124.5006ms)\n✔ refuses unsafe configurations (1056.4266ms)\n✔ drafts and unfinished markers cannot reach production, drafts allowed on staging, skipped for lighthouse (622.3352ms)\n✔ structurally incomplete or broken content fails (344.1551ms)\n✔ localhost leaking from content into a deployed build is caught in the output (123.3455ms)\nℹ tests 7\nℹ suites 0\nℹ pass 7\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 2654.5555\n"
+          }
+        ]
+      }
+    },
+    {
+      "scenario": "s5-ai-geo",
+      "rep": 1,
+      "state": "run",
+      "exitCode": 0,
+      "costUsd": 0.1805613,
+      "turns": 27,
+      "durationMs": 52910,
+      "isError": false,
+      "subtype": "success",
+      "terminalReason": "completed",
+      "models": [
+        "claude-sonnet-5-5"
+      ],
+      "isolation": {
+        "notes": [],
+        "violations": [
+          "<watched-memory-repo> changed during the run"
+        ]
+      },
+      "grade": {
+        "scenario": "s5-ai-geo",
+        "status": "fail",
+        "counts": {
+          "pass": 1,
+          "fail": 4,
+          "pending": 0
+        },
+        "checks": [
+          {
+            "index": 1,
+            "label": "check-site: ROBOTS-005, LLMS-001, ENTITY-001 gone",
+            "type": "check-site",
+            "required": true,
+            "gap": "G7",
+            "status": "fail",
+            "detail": "LLMS-001 still reported (https://acme-widgets.test/llms.txt)"
+          },
+          {
+            "index": 2,
+            "label": "llms.txt exists with an H1",
+            "type": "file-regex",
+            "required": true,
+            "gap": "G11",
+            "status": "fail",
+            "detail": "no file matches dist/llms.txt"
+          },
+          {
+            "index": 3,
+            "label": "OAI-SearchBot and PerplexityBot no longer disallowed",
+            "type": "file-not-regex",
+            "required": true,
+            "gap": "G7",
+            "status": "pass",
+            "detail": "absent"
+          },
+          {
+            "index": 4,
+            "label": "report sends the owner to the Cloudflare dashboard",
+            "type": "report-regex",
+            "required": true,
+            "gap": "G7",
+            "status": "fail",
+            "detail": "/AI Crawl Control|managed robots|Bot Preference|robots\\.txt géré|bloc géré/i not found in the final report"
+          },
+          {
+            "index": 5,
+            "label": "report: llms.txt is optional / a proposal",
+            "type": "report-regex",
+            "required": true,
+            "gap": "G11",
+            "status": "fail",
+            "detail": "/proposal|optional|not used by Google|proposition|facultatif|optionnel|pas utilisé par Google|n'est pas utilisé/i not found in the final report"
+          }
+        ]
+      }
+    }
+  ],
+  "totals": {
+    "fail": 2,
+    "pass": 0,
+    "pending": 0,
+    "notRun": 0
+  }
+}

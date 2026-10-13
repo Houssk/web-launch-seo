@@ -1,0 +1,10 @@
+{
+  "fixture": "privacy-fr",
+  "kind": "dist",
+  "mode": "launch",
+  "site": "https://acme-widgets.test",
+  "errors": [],
+  "warnings": ["TRACKER-001"],
+  "allowedWarnings": [],
+  "infos": []
+}

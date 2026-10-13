@@ -1,0 +1,11 @@
+{
+  "fixture": "opening",
+  "kind": "dist",
+  "mode": "launch",
+  "site": "https://acme-widgets.test",
+  "errors": ["CANON-001", "INDEX-001", "PLACEHOLDER-001", "ROBOTS-002", "ROBOTS-003", "SITEMAP-002", "SITEMAP-004"],
+  "warnings": ["CANON-003"],
+  "allowedWarnings": ["CANON-002", "OG-001", "ROBOTS-005"],
+  "infos": [],
+  "notes": "SITEMAP-003 and SITEMAP-004 only evaluate <loc> entries on the --site host; an off-host <loc> is reported by SITEMAP-002 alone. NOTFOUND-001 cannot be planted in a dist/ (the check-site server always answers 404): it is covered by the live-mode tests."
+}

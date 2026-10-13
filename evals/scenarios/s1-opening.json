@@ -1,0 +1,26 @@
+{
+  "id": "s1-opening",
+  "gaps": ["G1", "G2", "G3"],
+  "fixture": "opening",
+  "query": "We go live tomorrow on https://acme-widgets.test. Here is the production build in `dist/`. Make it launch-ready and tell me what still needs me.",
+  "expected_behavior": [
+    "Opens robots.txt (no Disallow: / for *) and adds an absolute https Sitemap line on the public host.",
+    "Replaces the localhost canonicals and sitemap entries with https://acme-widgets.test URLs.",
+    "Makes the home page indexable, keeps /legal/ noindex and takes it out of the sitemap.",
+    "Does not invent the missing About content: names the Lorem ipsum / TODO text as an owner decision.",
+    "Explains that a page blocked by robots.txt cannot have its noindex read, and that Google may keep the old robots.txt for up to 24 hours."
+  ],
+  "checks": [
+    { "label": "check-site: opening errors gone", "gap": "G1", "type": "check-site", "args": ["--dist", "dist", "--site", "https://acme-widgets.test"], "mustNotFind": ["ROBOTS-002", "ROBOTS-003", "SITEMAP-002", "CANON-001", "INDEX-001", "SITEMAP-004"], "severities": ["error"] },
+    { "label": "robots.txt: the * group no longer disallows /", "gap": "G1", "type": "file-not-regex", "path": "dist/robots.txt", "pattern": "User-agent:\\s*\\*[^\\n]*\\n(?:(?!\\s*User-agent)[^\\n]*\\n)*?\\s*Disallow:\\s*/\\s*(?:\\n|$)", "flags": "i" },
+    { "label": "robots.txt: absolute https Sitemap on the public host", "gap": "G3", "type": "file-regex", "path": "dist/robots.txt", "pattern": "^Sitemap:\\s*https://acme-widgets\\.test/\\S*\\.xml", "flags": "mi" },
+    { "label": "no localhost canonical left", "gap": "G3", "type": "file-not-regex", "path": "dist/**/*.html", "pattern": "<link[^>]+rel=[\"']?canonical[^>]+localhost|localhost[^>]+rel=[\"']?canonical", "flags": "i" },
+    { "label": "no localhost in the sitemap", "gap": "G3", "type": "file-not-regex", "path": "dist/sitemap.xml", "pattern": "localhost" },
+    { "label": "home page indexable", "gap": "G1", "type": "file-not-regex", "path": "dist/index.html", "pattern": "<meta[^>]+name=[\"']?robots[\"']?[^>]+noindex", "flags": "i" },
+    { "label": "legal notice still noindex", "gap": "G1", "type": "file-regex", "path": "dist/legal/index.html", "pattern": "<meta[^>]+name=[\"']?robots[\"']?[^>]+noindex", "flags": "i" },
+    { "label": "legal notice out of the sitemap", "gap": "G1", "type": "file-not-regex", "path": "dist/sitemap.xml", "pattern": "acme-widgets\\.test/legal/" },
+    { "label": "report names the placeholder text", "gap": "G1", "type": "report-regex", "pattern": "lorem|placeholder|TODO|provisoire|à compléter", "flags": "i" },
+    { "label": "report cites the robots.txt cache (24 h)", "gap": "G2", "type": "report-regex", "pattern": "24[ -]?h(ours?|eures?)?\\b", "flags": "i" },
+    { "label": "report: a page blocked by robots.txt cannot have its noindex read", "gap": "G2", "type": "report-regex", "pattern": "noindex[^.\\n]{0,160}\\b(not|never|can'?t|cannot|won'?t)\\b[^.\\n]{0,60}\\b(seen|read|see|crawl|crawled|fetch|fetched)\\b|\\b(can'?t|cannot|won'?t|never|not)\\b[^.\\n]{0,40}\\b(see|read|crawl|fetch)\\b[^.\\n]{0,80}noindex|noindex[^.\\n]{0,160}\\bn(e |')[^.\\n]{0,60}\\b(pas|jamais|plus)\\b[^.\\n]{0,40}(lu|vu|voir|lire|explor)|\\bne (peut|pourra|verra|lira|voit|lit)\\b[^.\\n]{0,80}noindex", "flags": "i" }
+  ]
+}

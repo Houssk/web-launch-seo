@@ -1,0 +1,354 @@
+{
+  "campaign": "2026-10-12-none",
+  "variant": "none",
+  "model": "claude-sonnet-5-5",
+  "claudeVersion": "2.1.296 (Claude Code)",
+  "repoSha": "653982c",
+  "skill": "none",
+  "date": "2026-10-12",
+  "runBudgetUsd": 1,
+  "campaignBudgetUsd": 5,
+  "maxTurns": 40,
+  "spentUsd": 0.412654,
+  "stoppedBecause": "isolation: a watched repository changed during the run",
+  "runs": [
+    {
+      "scenario": "s1-opening",
+      "rep": 1,
+      "state": "run",
+      "exitCode": 0,
+      "costUsd": 0.14571060000000002,
+      "turns": 19,
+      "durationMs": 43402,
+      "isError": false,
+      "subtype": "success",
+      "terminalReason": "completed",
+      "models": [
+        "claude-sonnet-5-5"
+      ],
+      "isolation": {
+        "notes": [],
+        "violations": []
+      },
+      "grade": {
+        "scenario": "s1-opening",
+        "status": "fail",
+        "counts": {
+          "pass": 9,
+          "fail": 2,
+          "pending": 0
+        },
+        "checks": [
+          {
+            "index": 1,
+            "label": "check-site: opening errors gone",
+            "type": "check-site",
+            "required": true,
+            "gap": "G1",
+            "status": "pass",
+            "detail": "0 errors, 1 warnings"
+          },
+          {
+            "index": 2,
+            "label": "robots.txt: the * group no longer disallows /",
+            "type": "file-not-regex",
+            "required": true,
+            "gap": "G1",
+            "status": "pass",
+            "detail": "absent"
+          },
+          {
+            "index": 3,
+            "label": "robots.txt: absolute https Sitemap on the public host",
+            "type": "file-regex",
+            "required": true,
+            "gap": "G3",
+            "status": "pass",
+            "detail": "1 file(s)"
+          },
+          {
+            "index": 4,
+            "label": "no localhost canonical left",
+            "type": "file-not-regex",
+            "required": true,
+            "gap": "G3",
+            "status": "pass",
+            "detail": "absent"
+          },
+          {
+            "index": 5,
+            "label": "no localhost in the sitemap",
+            "type": "file-not-regex",
+            "required": true,
+            "gap": "G3",
+            "status": "pass",
+            "detail": "absent"
+          },
+          {
+            "index": 6,
+            "label": "home page indexable",
+            "type": "file-not-regex",
+            "required": true,
+            "gap": "G1",
+            "status": "pass",
+            "detail": "absent"
+          },
+          {
+            "index": 7,
+            "label": "legal notice still noindex",
+            "type": "file-regex",
+            "required": true,
+            "gap": "G1",
+            "status": "pass",
+            "detail": "1 file(s)"
+          },
+          {
+            "index": 8,
+            "label": "legal notice out of the sitemap",
+            "type": "file-not-regex",
+            "required": true,
+            "gap": "G1",
+            "status": "pass",
+            "detail": "absent"
+          },
+          {
+            "index": 9,
+            "label": "report names the placeholder text",
+            "type": "report-regex",
+            "required": true,
+            "gap": "G1",
+            "status": "pass",
+            "detail": "found in the final report"
+          },
+          {
+            "index": 10,
+            "label": "report cites the robots.txt cache (24 h)",
+            "type": "report-regex",
+            "required": true,
+            "gap": "G2",
+            "status": "fail",
+            "detail": "/24[ -]?h(ours?|eures?)?\\b/i not found in the final report"
+          },
+          {
+            "index": 11,
+            "label": "report: a page blocked by robots.txt cannot have its noindex read",
+            "type": "report-regex",
+            "required": true,
+            "gap": "G2",
+            "status": "fail",
+            "detail": "/noindex[^.\\n]{0,160}\\b(not|never|can'?t|cannot|won'?t)\\b[^.\\n]{0,60}\\b(seen|read|see|crawl|crawled|fetch|fetched)\\b|\\b(can'?t|cannot|won'?t|never|not)\\b[^.\\n]{0,40}\\b(see|read|crawl|fetch)\\b[^.\\n]{0,80}noindex|noindex[^.\\n]{0,160}\\bn(e |')[^.\\n]{0,60}\\b(pas|jamais|plus)\\b[^.\\n]{0,40}(lu|vu|voir|lire|explor)|\\bne (peut|pourra|verra|lira|voit|lit)\\b[^.\\n]{0,80}noindex/i not found in the final report"
+          }
+        ]
+      }
+    },
+    {
+      "scenario": "s2-build-guards",
+      "rep": 1,
+      "state": "run",
+      "exitCode": 0,
+      "costUsd": 0.2669434,
+      "turns": 19,
+      "durationMs": 93535,
+      "isError": false,
+      "subtype": "success",
+      "terminalReason": "completed",
+      "models": [
+        "claude-sonnet-5-5"
+      ],
+      "isolation": {
+        "notes": [],
+        "violations": [
+          "a watched repository changed during the run"
+        ]
+      },
+      "grade": {
+        "scenario": "s2-build-guards",
+        "status": "fail",
+        "counts": {
+          "pass": 16,
+          "fail": 3,
+          "pending": 0
+        },
+        "checks": [
+          {
+            "index": 1,
+            "label": "indexable build with an empty SITE_URL fails",
+            "type": "command",
+            "required": true,
+            "gap": "G3",
+            "status": "pass",
+            "detail": "exit 1 (expected nonzero)"
+          },
+          {
+            "index": 2,
+            "label": "indexable build without SITE_URL fails",
+            "type": "command",
+            "required": true,
+            "gap": "G3",
+            "status": "pass",
+            "detail": "exit 1 (expected nonzero)"
+          },
+          {
+            "index": 3,
+            "label": "indexable build on localhost without LIGHTHOUSE_CI fails",
+            "type": "command",
+            "required": true,
+            "gap": "G3",
+            "status": "pass",
+            "detail": "exit 1 (expected nonzero)"
+          },
+          {
+            "index": 4,
+            "label": "indexable build refuses a page with placeholder text",
+            "type": "mutation",
+            "required": true,
+            "gap": "G1",
+            "status": "pass",
+            "detail": "after the mutation: exit 1 (expected nonzero)"
+          },
+          {
+            "index": 5,
+            "label": "Lighthouse CI build (indexable, localhost, LIGHTHOUSE_CI=true) still works",
+            "type": "command",
+            "required": true,
+            "gap": "G3",
+            "status": "fail",
+            "detail": "exit 1 (expected 0): \n> acme-widgets-site@1.0.0 build\n> node build.mjs\n\n\nBuild refused (1 problem):\n  - PUBLIC_INDEXABLE=true requires SITE_URL=https://acme-widgets.test, got http://localhost:4321\n"
+          },
+          {
+            "index": 6,
+            "label": "a test covers the Lighthouse exception (a test file names LIGHTHOUSE_CI)",
+            "type": "any",
+            "required": true,
+            "gap": "G3",
+            "status": "fail",
+            "detail": "/LIGHTHOUSE_CI/ found in none of 1 file(s) matching **/*.test.mjs | no file matches **/*.test.js | no file matches **/*.spec.mjs | no file matches test/**/*.mjs | no file matches tests/**/*.mjs"
+          },
+          {
+            "index": 7,
+            "label": "production build succeeds",
+            "type": "command",
+            "required": true,
+            "gap": null,
+            "status": "pass",
+            "detail": "exit 0 (expected 0)"
+          },
+          {
+            "index": 8,
+            "label": "check-site on the production build: 0 error",
+            "type": "check-site",
+            "required": true,
+            "gap": "G4",
+            "status": "pass",
+            "detail": "0 errors, 0 warnings"
+          },
+          {
+            "index": 9,
+            "label": "production build: no localhost in pages",
+            "type": "file-not-regex",
+            "required": true,
+            "gap": "G3",
+            "status": "pass",
+            "detail": "absent"
+          },
+          {
+            "index": 10,
+            "label": "production build: no localhost in the sitemap",
+            "type": "file-not-regex",
+            "required": true,
+            "gap": "G3",
+            "status": "pass",
+            "detail": "absent"
+          },
+          {
+            "index": 11,
+            "label": "production build: no localhost in robots.txt",
+            "type": "file-not-regex",
+            "required": true,
+            "gap": "G3",
+            "status": "pass",
+            "detail": "absent"
+          },
+          {
+            "index": 12,
+            "label": "production build: home page indexable",
+            "type": "file-not-regex",
+            "required": true,
+            "gap": "G1",
+            "status": "pass",
+            "detail": "absent"
+          },
+          {
+            "index": 13,
+            "label": "staging build (no PUBLIC_INDEXABLE) succeeds",
+            "type": "command",
+            "required": true,
+            "gap": "G1",
+            "status": "pass",
+            "detail": "exit 0 (expected 0)"
+          },
+          {
+            "index": 14,
+            "label": "check-site --mode staging: 0 error, no ROBOTS-006",
+            "type": "check-site",
+            "required": true,
+            "gap": "G2",
+            "status": "pass",
+            "detail": "0 errors, 1 warnings"
+          },
+          {
+            "index": 15,
+            "label": "staging pages carry noindex (tag or X-Robots-Tag)",
+            "type": "any",
+            "required": true,
+            "gap": "G1",
+            "status": "pass",
+            "detail": "pass/pass"
+          },
+          {
+            "index": 16,
+            "label": "staging robots.txt does not hide the noindex (no Disallow: / for *)",
+            "type": "file-not-regex",
+            "required": true,
+            "gap": "G2",
+            "status": "pass",
+            "detail": "absent"
+          },
+          {
+            "index": 17,
+            "label": "npm test passes",
+            "type": "command",
+            "required": true,
+            "gap": "G4",
+            "status": "pass",
+            "detail": "exit 0 (expected 0)"
+          },
+          {
+            "index": 18,
+            "label": "npm test fails when the original build.mjs is put back",
+            "type": "mutation",
+            "required": true,
+            "gap": "G4",
+            "status": "pass",
+            "detail": "after the mutation: exit 1 (expected nonzero)"
+          },
+          {
+            "index": 19,
+            "label": "npm test checks the built output: fails when the og:image file is missing (OG-001)",
+            "type": "mutation",
+            "required": true,
+            "gap": "G4",
+            "status": "fail",
+            "detail": "after the mutation: exit 0 (expected nonzero): \n> acme-widgets-site@1.0.0 test\n> node --test\n\n✔ production build is indexable and complete (148.2517ms)\n✔ staging build is public but never indexable (133.7825ms)\n✔ refuses missing, local or mismatched configuration (707.8358ms)\n✔ local build needs explicit opt-in and stays noindex (112.6805ms)\n✔ draft pages and placeholder text block production only (374.2904ms)\n✔ incomplete pages are rejected everywhere (376.4387ms)\n✔ a localhost URL smuggled in via public/ is caught in the output (103.9328ms)\nℹ tests 7\nℹ suites 0\nℹ pass 7\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 2100.5293\n"
+          }
+        ]
+      }
+    }
+  ],
+  "totals": {
+    "fail": 2,
+    "pass": 0,
+    "pending": 0,
+    "notRun": 0
+  }
+}

@@ -1,0 +1,142 @@
+{
+  "campaign": "2026-10-12-new-c",
+  "variant": "new",
+  "model": "claude-sonnet-5-5",
+  "claudeVersion": "2.1.296 (Claude Code)",
+  "repoSha": "1613347",
+  "skill": "content-cae4b5090a05",
+  "date": "2026-10-12",
+  "runBudgetUsd": 0.55,
+  "campaignBudgetUsd": 0.92,
+  "maxTurns": 40,
+  "spentUsd": 0.20621989999999998,
+  "stoppedBecause": null,
+  "runs": [
+    {
+      "scenario": "s8-privacy-fr",
+      "rep": 1,
+      "state": "run",
+      "exitCode": 0,
+      "costUsd": 0.20621989999999998,
+      "turns": 25,
+      "durationMs": 57760,
+      "isError": false,
+      "subtype": "success",
+      "terminalReason": "completed",
+      "models": [
+        "claude-sonnet-5-5"
+      ],
+      "isolation": {
+        "notes": [],
+        "violations": []
+      },
+      "grade": {
+        "scenario": "s8-privacy-fr",
+        "status": "pass",
+        "counts": {
+          "pass": 10,
+          "fail": 0,
+          "pending": 0
+        },
+        "checks": [
+          {
+            "index": 1,
+            "label": "Clarity no longer loaded unconditionally",
+            "type": "file-not-regex",
+            "required": true,
+            "gap": "G8",
+            "status": "pass",
+            "detail": "absent"
+          },
+          {
+            "index": 2,
+            "label": "opt-out link on the privacy page",
+            "type": "file-regex",
+            "required": true,
+            "gap": "G8",
+            "status": "pass",
+            "detail": "1 file(s)"
+          },
+          {
+            "index": 3,
+            "label": "privacy page no longer claims 'aucun traceur'",
+            "type": "file-not-regex",
+            "required": true,
+            "gap": "G8",
+            "status": "pass",
+            "detail": "absent"
+          },
+          {
+            "index": 4,
+            "label": "privacy page names the processor",
+            "type": "file-regex",
+            "required": true,
+            "gap": "G8",
+            "status": "pass",
+            "detail": "1 file(s)"
+          },
+          {
+            "index": 5,
+            "label": "privacy page gives a retention period",
+            "type": "file-regex",
+            "required": true,
+            "gap": "G8",
+            "status": "pass",
+            "detail": "1 file(s)"
+          },
+          {
+            "index": 6,
+            "label": "report: article 82",
+            "type": "report-regex",
+            "required": true,
+            "gap": "G8",
+            "status": "pass",
+            "detail": "found in the final report"
+          },
+          {
+            "index": 7,
+            "label": "report: opposition",
+            "type": "report-regex",
+            "required": true,
+            "gap": "G8",
+            "status": "pass",
+            "detail": "found in the final report"
+          },
+          {
+            "index": 8,
+            "label": "report: LCEN",
+            "type": "report-regex",
+            "required": true,
+            "gap": "G12",
+            "status": "pass",
+            "detail": "found in the final report"
+          },
+          {
+            "index": 9,
+            "label": "report: hosting provider or publication director",
+            "type": "report-regex",
+            "required": true,
+            "gap": "G12",
+            "status": "pass",
+            "detail": "found in the final report"
+          },
+          {
+            "index": 10,
+            "label": "report: legal decision left to the owner",
+            "type": "report-regex",
+            "required": true,
+            "gap": "G8",
+            "status": "pass",
+            "detail": "found in the final report"
+          }
+        ]
+      }
+    }
+  ],
+  "totals": {
+    "fail": 0,
+    "pass": 1,
+    "pending": 0,
+    "notRun": 0
+  }
+}

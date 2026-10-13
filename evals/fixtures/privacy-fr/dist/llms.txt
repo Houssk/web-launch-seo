@@ -1,0 +1,8 @@
+# Acme Widgets
+
+> Acme Widgets conçoit des widgets modulaires et réparables pour les petits ateliers.
+
+## Pages
+
+- [À propos](https://acme-widgets.test/a-propos/): l'équipe et l'atelier
+- [Confidentialité](https://acme-widgets.test/confidentialite/): données des visiteurs

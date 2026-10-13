@@ -1,0 +1,43 @@
+{
+  "id": "s2-build-guards",
+  "gaps": ["G1", "G2", "G3", "G4"],
+  "fixture": "source-project",
+  "query": "Make this build production-safe: it must be impossible to ship localhost URLs or an unfinished page to production, and add a staging mode that is public but never indexed. The build reads SITE_URL; production builds run with SITE_URL=https://acme-widgets.test and PUBLIC_INDEXABLE=true, staging builds with SITE_URL=https://staging.acme-widgets.test and without PUBLIC_INDEXABLE. CI also runs Lighthouse on an indexable build served locally (SITE_URL=http://localhost:4321 PUBLIC_INDEXABLE=true LIGHTHOUSE_CI=true); that build must keep working.",
+  "expected_behavior": [
+    "An indexable build with SITE_URL missing, empty or on localhost fails, except the explicit Lighthouse CI build, which keeps working and is covered by a test.",
+    "An indexable build refuses visible placeholder text (Lorem ipsum, TODO, TBD).",
+    "A build without PUBLIC_INDEXABLE is non-indexable: noindex on every page (tag or X-Robots-Tag) and a robots.txt that does NOT disallow everything, so the noindex can be read.",
+    "The output checks are wired into npm test: npm test builds and runs check-site --dist (or an equivalent) on the built output, so a defect in the output (an og:image whose file is missing) turns it red.",
+    "npm test fails when the original build.mjs is put back."
+  ],
+  "checks": [
+    { "label": "indexable build with an empty SITE_URL fails", "gap": "G3", "type": "command", "run": "npm run build", "env": { "SITE_URL": "", "PUBLIC_INDEXABLE": "true" }, "expectExit": "nonzero" },
+    { "label": "indexable build without SITE_URL fails", "gap": "G3", "type": "command", "run": "npm run build", "env": { "SITE_URL": null, "PUBLIC_INDEXABLE": "true" }, "expectExit": "nonzero" },
+    { "label": "indexable build on localhost without LIGHTHOUSE_CI fails", "gap": "G3", "type": "command", "run": "npm run build", "env": { "SITE_URL": "http://localhost:4321", "PUBLIC_INDEXABLE": "true" }, "expectExit": "nonzero" },
+    { "label": "indexable build refuses a page with placeholder text", "gap": "G1", "type": "mutation", "restore": [], "write": { "content/zz-draft.json": { "path": "/draft/", "nav": "Draft", "title": "Draft page | Acme Widgets", "description": "A draft page that was never finished and must not reach production in this state at all.", "h1": "Draft", "updated": "2026-10-12", "body": ["Lorem ipsum dolor sit amet.", "TODO: write this page."] } }, "run": "npm run build", "env": { "SITE_URL": "https://acme-widgets.test", "PUBLIC_INDEXABLE": "true" }, "expectExit": "nonzero" },
+    { "label": "Lighthouse CI build (indexable, localhost, LIGHTHOUSE_CI=true) still works", "gap": "G3", "type": "command", "run": "npm run build", "env": { "SITE_URL": "http://localhost:4321", "PUBLIC_INDEXABLE": "true", "LIGHTHOUSE_CI": "true" }, "expectExit": 0 },
+    { "label": "a test covers the Lighthouse exception (a test file names LIGHTHOUSE_CI)", "gap": "G3", "type": "any", "checks": [
+      { "type": "file-regex", "match": "any", "path": "**/*.test.mjs", "pattern": "LIGHTHOUSE_CI" },
+      { "type": "file-regex", "match": "any", "path": "**/*.test.js", "pattern": "LIGHTHOUSE_CI" },
+      { "type": "file-regex", "match": "any", "path": "**/*.spec.mjs", "pattern": "LIGHTHOUSE_CI" },
+      { "type": "file-regex", "match": "any", "path": "test/**/*.mjs", "pattern": "LIGHTHOUSE_CI" },
+      { "type": "file-regex", "match": "any", "path": "tests/**/*.mjs", "pattern": "LIGHTHOUSE_CI" }
+    ] },
+    { "label": "production build succeeds", "type": "command", "run": "npm run build", "env": { "SITE_URL": "https://acme-widgets.test", "PUBLIC_INDEXABLE": "true" }, "expectExit": 0 },
+    { "label": "check-site on the production build: 0 error", "gap": "G4", "type": "check-site", "args": ["--dist", "dist", "--site", "https://acme-widgets.test"], "maxErrors": 0 },
+    { "label": "production build: no localhost in pages", "gap": "G3", "type": "file-not-regex", "path": "dist/**/*.html", "pattern": "localhost" },
+    { "label": "production build: no localhost in the sitemap", "gap": "G3", "type": "file-not-regex", "path": "dist/sitemap.xml", "pattern": "localhost" },
+    { "label": "production build: no localhost in robots.txt", "gap": "G3", "type": "file-not-regex", "path": "dist/robots.txt", "pattern": "localhost" },
+    { "label": "production build: home page indexable", "gap": "G1", "type": "file-not-regex", "path": "dist/index.html", "pattern": "<meta[^>]+name=[\"']?robots[\"']?[^>]+noindex", "flags": "i" },
+    { "label": "staging build (no PUBLIC_INDEXABLE) succeeds", "gap": "G1", "type": "command", "run": "npm run build", "env": { "SITE_URL": "https://staging.acme-widgets.test", "PUBLIC_INDEXABLE": null }, "expectExit": 0 },
+    { "label": "check-site --mode staging: 0 error, no ROBOTS-006", "gap": "G2", "type": "check-site", "args": ["--dist", "dist", "--site", "https://staging.acme-widgets.test", "--mode", "staging"], "maxErrors": 0, "mustNotFind": ["ROBOTS-006"] },
+    { "label": "staging pages carry noindex (tag or X-Robots-Tag)", "gap": "G1", "type": "any", "checks": [
+      { "type": "file-regex", "path": "dist/index.html", "pattern": "<meta[^>]+name=[\"']?robots[\"']?[^>]+noindex", "flags": "i" },
+      { "type": "file-regex", "path": "dist/_headers", "pattern": "X-Robots-Tag:\\s*[^\\n]*noindex", "flags": "i" }
+    ] },
+    { "label": "staging robots.txt does not hide the noindex (no Disallow: / for *)", "gap": "G2", "type": "file-not-regex", "path": "dist/robots.txt", "pattern": "User-agent:\\s*\\*[^\\n]*\\n(?:(?!\\s*User-agent)[^\\n]*\\n)*?\\s*Disallow:\\s*/\\s*(?:\\n|$)", "flags": "i" },
+    { "label": "npm test passes", "gap": "G4", "type": "command", "run": "npm test", "expectExit": 0 },
+    { "label": "npm test fails when the original build.mjs is put back", "gap": "G4", "type": "mutation", "restore": ["build.mjs"], "run": "npm test", "expectExit": "nonzero" },
+    { "label": "npm test checks the built output: fails when the og:image file is missing (OG-001)", "gap": "G4", "type": "mutation", "remove": ["public/assets/img/og.png"], "run": "npm test", "expectExit": "nonzero" }
+  ]
+}

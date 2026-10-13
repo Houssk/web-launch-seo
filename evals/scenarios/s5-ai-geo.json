@@ -1,0 +1,19 @@
+{
+  "id": "s5-ai-geo",
+  "gaps": ["G7", "G11"],
+  "fixture": "schema-geo",
+  "query": "We want ChatGPT, Perplexity and Claude to cite us. Check our setup and fix what you can.",
+  "expected_behavior": [
+    "Spots the Cloudflare managed robots.txt block that disallows OAI-SearchBot and PerplexityBot; unblocks the search crawlers and sends the owner to the Cloudflare dashboard (AI Crawl Control, managed robots.txt), where the block comes from.",
+    "Separates search/retrieval crawlers from training crawlers and leaves the training choice to the owner.",
+    "Aligns the entity name everywhere (Organization.name, og:site_name, llms.txt H1).",
+    "Adds an llms.txt presented as an optional proposal, not used by Google Search."
+  ],
+  "checks": [
+    { "label": "check-site: ROBOTS-005, LLMS-001, ENTITY-001 gone", "gap": "G7", "type": "check-site", "args": ["--dist", "dist", "--site", "https://acme-widgets.test"], "mustNotFind": ["ROBOTS-005", "LLMS-001", "ENTITY-001"] },
+    { "label": "llms.txt exists with an H1", "gap": "G11", "type": "file-regex", "path": "dist/llms.txt", "pattern": "^# \\S", "flags": "m" },
+    { "label": "OAI-SearchBot and PerplexityBot no longer disallowed", "gap": "G7", "type": "file-not-regex", "path": "dist/robots.txt", "pattern": "User-agent:\\s*(OAI-SearchBot|PerplexityBot)\\s*\\n(?:(?!\\s*User-agent)[^\\n]*\\n)*?\\s*Disallow:\\s*/\\s*(?:\\n|$)", "flags": "i" },
+    { "label": "report sends the owner to the Cloudflare dashboard", "gap": "G7", "type": "report-regex", "pattern": "AI Crawl Control|managed robots|Bot Preference|robots\\.txt géré|bloc géré", "flags": "i" },
+    { "label": "report: llms.txt is optional / a proposal", "gap": "G11", "type": "report-regex", "pattern": "proposal|optional|not used by Google|proposition|facultatif|optionnel|pas utilisé par Google|n'est pas utilisé", "flags": "i" }
+  ]
+}

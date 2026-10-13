@@ -1,0 +1,18 @@
+{
+  "id": "s3-keywords",
+  "gaps": ["G5"],
+  "fixture": "source-project",
+  "query": "Do a keyword study for this site. We have no paid SEO tools. Write it to `docs/seo/keywords.md`.",
+  "expected_behavior": [
+    "Works from the site content (content/*.json); no network tool is available in the bench, and the agent says so instead of inventing data.",
+    "Writes a table with Source, Date and Volume columns; every Volume is 'not measured'.",
+    "Never writes a monthly search volume; ranks by qualitative signals and points to Search Console once the site is live."
+  ],
+  "checks": [
+    { "label": "keywords file has a Volume column", "gap": "G5", "type": "file-regex", "path": "docs/seo/keywords.md", "pattern": "\\|\\s*\\**Volume[^|]*\\|", "flags": "i" },
+    { "label": "keywords file has Source and Date columns", "gap": "G5", "type": "file-regex", "path": "docs/seo/keywords.md", "pattern": "^(?=[\\s\\S]*\\|\\s*\\**Source[^|]*\\|)(?=[\\s\\S]*\\|\\s*\\**Date[^|]*\\|)", "flags": "i" },
+    { "label": "every Volume cell is 'not measured'", "gap": "G5", "type": "md-table-column", "path": "docs/seo/keywords.md", "column": "Volume", "allow": "^(not measured|unmeasured|no data|unknown|n/?a|non mesurée?s?|inconnue?|pas de données?|aucune donnée)\\b.*$|^[—–-]?$", "flags": "i" },
+    { "label": "no invented monthly volume anywhere in the file", "gap": "G5", "type": "file-not-regex", "path": "docs/seo/keywords.md", "pattern": "\\b\\d[\\d,.\\s]*\\s*k?\\+?\\s*(searches|/\\s*mo(nth)?\\b|per month|monthly searches|recherches|/\\s*mois\\b|par mois)", "flags": "i" },
+    { "label": "report states the limits (not measured / Search Console)", "gap": "G5", "type": "report-regex", "pattern": "not measured|no data|Search Console|non mesuré|pas de donnée|aucune donnée", "flags": "i" }
+  ]
+}

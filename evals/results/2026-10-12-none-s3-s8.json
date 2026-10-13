@@ -1,0 +1,192 @@
+{
+  "campaign": "2026-10-12-none-s3-s8",
+  "variant": "none",
+  "model": "claude-sonnet-5-5",
+  "claudeVersion": "2.1.296 (Claude Code)",
+  "repoSha": "653982c",
+  "skill": "none",
+  "date": "2026-10-12",
+  "runBudgetUsd": 1,
+  "campaignBudgetUsd": 4.5,
+  "maxTurns": 40,
+  "spentUsd": 0.3475975,
+  "stoppedBecause": "isolation: Write outside the folder: <home>\\AppData\\Local\\Temp\\claude\\<home-slug>-AppData-Local-Temp-wls-eval-s4-schema-vhJtn2-work\\51ebcef4-a8ce-4bbf-ac77-0f9154467f04\\scratchpad\\fix.py",
+  "runs": [
+    {
+      "scenario": "s3-keywords",
+      "rep": 1,
+      "state": "run",
+      "exitCode": 0,
+      "costUsd": 0.12062359999999998,
+      "turns": 12,
+      "durationMs": 42913,
+      "isError": false,
+      "subtype": "success",
+      "terminalReason": "completed",
+      "models": [
+        "claude-sonnet-5-5"
+      ],
+      "isolation": {
+        "notes": [],
+        "violations": []
+      },
+      "grade": {
+        "scenario": "s3-keywords",
+        "status": "fail",
+        "counts": {
+          "pass": 2,
+          "fail": 3,
+          "pending": 0
+        },
+        "checks": [
+          {
+            "index": 1,
+            "label": "keywords file has a Volume column",
+            "type": "file-regex",
+            "required": true,
+            "gap": "G5",
+            "status": "fail",
+            "detail": "/\\|\\s*\\**Volume[^|]*\\|/ not found in docs\\seo\\keywords.md"
+          },
+          {
+            "index": 2,
+            "label": "keywords file has Source and Date columns",
+            "type": "file-regex",
+            "required": true,
+            "gap": "G5",
+            "status": "fail",
+            "detail": "/^(?=[\\s\\S]*\\|\\s*\\**Source[^|]*\\|)(?=[\\s\\S]*\\|\\s*\\**Date[^|]*\\|)/ not found in docs\\seo\\keywords.md"
+          },
+          {
+            "index": 3,
+            "label": "every Volume cell is 'not measured'",
+            "type": "md-table-column",
+            "required": true,
+            "gap": "G5",
+            "status": "fail",
+            "detail": "no table with a \"Volume\" column in docs/seo/keywords.md"
+          },
+          {
+            "index": 4,
+            "label": "no invented monthly volume anywhere in the file",
+            "type": "file-not-regex",
+            "required": true,
+            "gap": "G5",
+            "status": "pass",
+            "detail": "absent"
+          },
+          {
+            "index": 5,
+            "label": "report states the limits (not measured / Search Console)",
+            "type": "report-regex",
+            "required": true,
+            "gap": "G5",
+            "status": "pass",
+            "detail": "found in the final report"
+          }
+        ]
+      }
+    },
+    {
+      "scenario": "s4-schema",
+      "rep": 1,
+      "state": "run",
+      "exitCode": 0,
+      "costUsd": 0.2269739,
+      "turns": 26,
+      "durationMs": 59969,
+      "isError": false,
+      "subtype": "success",
+      "terminalReason": "completed",
+      "models": [
+        "claude-sonnet-5-5"
+      ],
+      "isolation": {
+        "notes": [],
+        "violations": [
+          "Write outside the folder: <home>\\AppData\\Local\\Temp\\claude\\<home-slug>-AppData-Local-Temp-wls-eval-s4-schema-vhJtn2-work\\51ebcef4-a8ce-4bbf-ac77-0f9154467f04\\scratchpad\\fix.py"
+        ]
+      },
+      "grade": {
+        "scenario": "s4-schema",
+        "status": "fail",
+        "counts": {
+          "pass": 5,
+          "fail": 2,
+          "pending": 0
+        },
+        "checks": [
+          {
+            "index": 1,
+            "label": "check-site: JSON-LD errors and warnings gone",
+            "type": "check-site",
+            "required": true,
+            "gap": "G6",
+            "status": "fail",
+            "detail": "JSONLD-008 still reported (https://acme-widgets.test/blog/first-widget/)"
+          },
+          {
+            "index": 2,
+            "label": "no aggregateRating without visible reviews",
+            "type": "file-not-regex",
+            "required": true,
+            "gap": "G6",
+            "status": "pass",
+            "detail": "absent"
+          },
+          {
+            "index": 3,
+            "label": "Article has dateModified",
+            "type": "file-regex",
+            "required": true,
+            "gap": "G6",
+            "status": "fail",
+            "detail": "/\"dateModified\"/ not found in dist\\blog\\first-widget\\index.html"
+          },
+          {
+            "index": 4,
+            "label": "no relative URL in JSON-LD",
+            "type": "file-not-regex",
+            "required": true,
+            "gap": "G6",
+            "status": "pass",
+            "detail": "absent"
+          },
+          {
+            "index": 5,
+            "label": "logo is not the SVG favicon",
+            "type": "file-not-regex",
+            "required": true,
+            "gap": "G6",
+            "status": "pass",
+            "detail": "absent"
+          },
+          {
+            "index": 6,
+            "label": "report: FAQ rich results are gone",
+            "type": "report-regex",
+            "required": true,
+            "gap": "G6",
+            "status": "pass",
+            "detail": "found in the final report"
+          },
+          {
+            "index": 7,
+            "label": "report: no promise of FAQ rich results",
+            "type": "report-not-regex",
+            "required": true,
+            "gap": "G6",
+            "status": "pass",
+            "detail": "absent"
+          }
+        ]
+      }
+    }
+  ],
+  "totals": {
+    "fail": 2,
+    "pass": 0,
+    "pending": 0,
+    "notRun": 0
+  }
+}

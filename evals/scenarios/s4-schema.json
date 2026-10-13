@@ -1,0 +1,20 @@
+{
+  "id": "s4-schema",
+  "gaps": ["G6"],
+  "fixture": "schema-geo",
+  "query": "Our structured data was written in 2022. Bring it up to date.",
+  "expected_behavior": [
+    "Fixes the invalid block, escapes '<', makes every JSON-LD URL absolute, uses a raster logo of at least 112 x 112 px, adds dateModified to the Article.",
+    "Removes the aggregateRating that no visible review supports (never invents or keeps a rating).",
+    "Says that FAQ rich results are no longer shown by Google and does not promise them."
+  ],
+  "checks": [
+    { "label": "check-site: JSON-LD errors and warnings gone", "gap": "G6", "type": "check-site", "args": ["--dist", "dist", "--site", "https://acme-widgets.test"], "mustNotFind": ["JSONLD-001", "JSONLD-003", "JSONLD-004", "JSONLD-005", "JSONLD-008"] },
+    { "label": "no aggregateRating without visible reviews", "gap": "G6", "type": "file-not-regex", "path": "dist/**/*.html", "pattern": "aggregateRating" },
+    { "label": "Article has dateModified", "gap": "G6", "type": "file-regex", "path": "dist/blog/first-widget/index.html", "pattern": "\"dateModified\"" },
+    { "label": "no relative URL in JSON-LD", "gap": "G6", "type": "file-not-regex", "path": "dist/**/*.html", "pattern": "\"(?:url|@id|logo|image|item|mainEntityOfPage)\"\\s*:\\s*\\[?\\s*\"/" },
+    { "label": "logo is not the SVG favicon", "gap": "G6", "type": "file-not-regex", "path": "dist/**/*.html", "pattern": "\"logo\"\\s*:\\s*(\\{[^}]*)?\"[^\"]*\\.svg\"" },
+    { "label": "report: FAQ rich results are gone", "gap": "G6", "type": "report-regex", "pattern": "FAQ[\\s\\S]{0,160}(no longer|deprecat|removed|not shown|retired|discontinued|n'apparai|plus affich|supprim|retir|abandonn|dépréci|obsolète)|rich results?[\\s\\S]{0,60}FAQ|résultats? enrichis?[\\s\\S]{0,60}FAQ", "flags": "i" },
+    { "label": "report: no promise of FAQ rich results", "gap": "G6", "type": "report-not-regex", "pattern": "FAQ rich results? (will|can) (appear|show)", "flags": "i" }
+  ]
+}

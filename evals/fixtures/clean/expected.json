@@ -1,0 +1,10 @@
+{
+  "fixture": "clean",
+  "kind": "dist",
+  "mode": "launch",
+  "site": "https://acme-widgets.test",
+  "errors": [],
+  "warnings": [],
+  "allowedWarnings": [],
+  "infos": []
+}

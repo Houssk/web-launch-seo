@@ -1,0 +1,151 @@
+{
+  "campaign": "2026-10-12-old-s1probe",
+  "variant": "old",
+  "model": "claude-sonnet-5-5",
+  "claudeVersion": "2.1.296 (Claude Code)",
+  "repoSha": "a4ad586",
+  "skill": "b947a12",
+  "date": "2026-10-12",
+  "runBudgetUsd": 1,
+  "campaignBudgetUsd": 8,
+  "maxTurns": 40,
+  "spentUsd": 0.21811589999999995,
+  "stoppedBecause": null,
+  "runs": [
+    {
+      "scenario": "s1-opening",
+      "rep": 1,
+      "state": "run",
+      "exitCode": 0,
+      "costUsd": 0.21811589999999995,
+      "turns": 33,
+      "durationMs": 54845,
+      "isError": false,
+      "subtype": "success",
+      "terminalReason": "completed",
+      "models": [
+        "claude-sonnet-5-5"
+      ],
+      "isolation": {
+        "notes": [],
+        "violations": []
+      },
+      "grade": {
+        "scenario": "s1-opening",
+        "status": "fail",
+        "counts": {
+          "pass": 9,
+          "fail": 2,
+          "pending": 0
+        },
+        "checks": [
+          {
+            "index": 1,
+            "label": "check-site: opening errors gone",
+            "type": "check-site",
+            "required": true,
+            "gap": "G1",
+            "status": "pass",
+            "detail": "0 errors, 0 warnings"
+          },
+          {
+            "index": 2,
+            "label": "robots.txt: the * group no longer disallows /",
+            "type": "file-not-regex",
+            "required": true,
+            "gap": "G1",
+            "status": "pass",
+            "detail": "absent"
+          },
+          {
+            "index": 3,
+            "label": "robots.txt: absolute https Sitemap on the public host",
+            "type": "file-regex",
+            "required": true,
+            "gap": "G3",
+            "status": "pass",
+            "detail": "1 file(s)"
+          },
+          {
+            "index": 4,
+            "label": "no localhost canonical left",
+            "type": "file-not-regex",
+            "required": true,
+            "gap": "G3",
+            "status": "pass",
+            "detail": "absent"
+          },
+          {
+            "index": 5,
+            "label": "no localhost in the sitemap",
+            "type": "file-not-regex",
+            "required": true,
+            "gap": "G3",
+            "status": "pass",
+            "detail": "absent"
+          },
+          {
+            "index": 6,
+            "label": "home page indexable",
+            "type": "file-not-regex",
+            "required": true,
+            "gap": "G1",
+            "status": "pass",
+            "detail": "absent"
+          },
+          {
+            "index": 7,
+            "label": "legal notice still noindex",
+            "type": "file-regex",
+            "required": true,
+            "gap": "G1",
+            "status": "pass",
+            "detail": "1 file(s)"
+          },
+          {
+            "index": 8,
+            "label": "legal notice out of the sitemap",
+            "type": "file-not-regex",
+            "required": true,
+            "gap": "G1",
+            "status": "pass",
+            "detail": "absent"
+          },
+          {
+            "index": 9,
+            "label": "report names the placeholder text",
+            "type": "report-regex",
+            "required": true,
+            "gap": "G1",
+            "status": "pass",
+            "detail": "found in the final report"
+          },
+          {
+            "index": 10,
+            "label": "report cites the robots.txt cache (24 h)",
+            "type": "report-regex",
+            "required": true,
+            "gap": "G2",
+            "status": "fail",
+            "detail": "/24[ -]?h(ours?|eures?)?\\b/i not found in the final report"
+          },
+          {
+            "index": 11,
+            "label": "report: a page blocked by robots.txt cannot have its noindex read",
+            "type": "report-regex",
+            "required": true,
+            "gap": "G2",
+            "status": "fail",
+            "detail": "/noindex[^.\\n]{0,160}\\b(not|never|can'?t|cannot|won'?t)\\b[^.\\n]{0,60}\\b(seen|read|see|crawl|crawled|fetch|fetched)\\b|\\b(can'?t|cannot|won'?t|never|not)\\b[^.\\n]{0,40}\\b(see|read|crawl|fetch)\\b[^.\\n]{0,80}noindex|noindex[^.\\n]{0,160}\\bn(e |')[^.\\n]{0,60}\\b(pas|jamais|plus)\\b[^.\\n]{0,40}(lu|vu|voir|lire|explor)|\\bne (peut|pourra|verra|lira|voit|lit)\\b[^.\\n]{0,80}noindex/i not found in the final report"
+          }
+        ]
+      }
+    }
+  ],
+  "totals": {
+    "fail": 1,
+    "pass": 0,
+    "pending": 0,
+    "notRun": 0
+  }
+}
